@@ -10,13 +10,33 @@ const router = createRouter({
       component: HomeView
     },
     {
+      path: '/podium-bi-portal',
+      name: 'podium-bi-portal',
+      component: () => import('../views/PodiumBiPortalView.vue'),
+    },
+    {
+      path: '/walmart-retail-data',
+      name: 'walmart-retail-data',
+      component: () => import('../views/WalmartRetailDataView.vue'),
+    },
+    {
+      path: '/contact',
+      name: 'contact',
+      component: () => import('../views/ContactView.vue'),
+    },
+    {
+      path: '/blog',
+      name: 'blog',
+      component: () => import('../views/BlogView.vue'),
+    },
+  /* {
       path: '/about',
       name: 'about',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue')
-    }
+    }*/
   ]
 })
 
