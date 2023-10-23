@@ -1,7 +1,7 @@
 <template>
  <div>
    <header-template />
-   <main>
+   <main class="mt-[-104px]">
      <first-screen />
      <slider-review />
      <advantages-template />

@@ -1,6 +1,6 @@
 <template>
   <header class="flex max-w-[1464px] mx-auto px-3 py-10 pr-[60px] bg-black text-white">
-     <app-logo class="mr-[88px]"></app-logo>
+     <app-logo class="mr-[-57px]"></app-logo>
     <nav class="mx-auto">
       <ul class="flex">
         <li>
