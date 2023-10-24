@@ -25,7 +25,7 @@
 
 <script setup>
 import {RouterLink} from 'vue-router'
-import AppLogo from "@/components/AppLogo.vue";
+import AppLogo from "@/components/ui/AppLogo.vue";
 </script>
 
 <style scoped>

@@ -1,5 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import PodiumBiPortalView from '../views/PodiumBiPortalView.vue'
+import WalmartRetailDataView from '../views/WalmartRetailDataView.vue'
+import ContactView from '../views/ContactView.vue'
+import BlogView from '../views/BlogView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,22 +16,22 @@ const router = createRouter({
     {
       path: '/podium-bi-portal',
       name: 'podium-bi-portal',
-      component: () => import('../views/PodiumBiPortalView.vue'),
+      component: PodiumBiPortalView,
     },
     {
       path: '/walmart-retail-data',
       name: 'walmart-retail-data',
-      component: () => import('../views/WalmartRetailDataView.vue'),
+      component: WalmartRetailDataView,
     },
     {
       path: '/contact',
       name: 'contact',
-      component: () => import('../views/ContactView.vue'),
+      component: ContactView,
     },
     {
       path: '/blog',
       name: 'blog',
-      component: () => import('../views/BlogView.vue'),
+      component: BlogView,
     },
   /* {
       path: '/about',

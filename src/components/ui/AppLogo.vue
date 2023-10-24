@@ -6,7 +6,7 @@
 
 <script setup>
 import {RouterLink} from 'vue-router'
-import Logo from "@/components/icons/Logo.vue"
+import Logo from "@/components/ui/icons/Logo.vue"
 </script>
 
 <style scoped>

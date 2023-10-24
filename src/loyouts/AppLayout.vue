@@ -14,13 +14,13 @@
 </template>
 
 <script setup>
-import HeaderTemplate from "@/components/HeaderTemplate.vue";
-import FirstScreen from "@/components/FirstScreen.vue";
-import SliderReview from "@/components/SliderReview.vue";
-import AdvantagesTemplate from "@/components/AdvantagesTemplate.vue";
-import ServicesTemplate from "@/components/ServicesTemplate.vue";
-import AccordionTemplate from "@/components/AccordionTemplate.vue";
-import FooterTemplate from "@/components/FooterTemplate.vue";
+import HeaderTemplate from "@/components/Header/HeaderTemplate.vue";
+import FirstScreen from "@/components/FirstScreen/FirstScreen.vue";
+import SliderReview from "@/components/SliderReview/SliderReview.vue";
+import AdvantagesTemplate from "@/components/AdvantagesTemplate/AdvantagesTemplate.vue";
+import ServicesTemplate from "@/components/ServicesTemplate/ServicesTemplate.vue";
+import AccordionTemplate from "@/components/AccordionTemplate/AccordionTemplate.vue";
+import FooterTemplate from "@/components/Footer/FooterTemplate.vue";
 </script>
 
 <style scoped>
