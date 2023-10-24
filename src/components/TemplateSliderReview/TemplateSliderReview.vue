@@ -4,10 +4,8 @@
   </section>
 </template>
 
-<script>
-export default {
-  name: "SliderReview"
-}
+<script setup>
+
 </script>
 
 <style scoped>
