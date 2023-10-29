@@ -1,5 +1,5 @@
 <template>
-  <li>
+  <li :class="variant">
     <template-link
         :href="href"
         :to="to"
@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import {defineAsyncComponent} from "vue";
+import {defineAsyncComponent, computed} from "vue";
 import TemplateLink from "@/components/ui/TemplateLink.vue";
 const TemplateNav = defineAsyncComponent(()=> import("@/components/ui/TemplateNav.vue"))
 
@@ -24,13 +24,31 @@ defineOptions({
   inheritAttrs: false, // запретить любой v-bind с родительского компонента в тег обёртку <li>  для того что бы всё передавалось в тег <a>
 })
 
-defineProps({
+const props = defineProps({
   text: String,
   href: String,
+ 
   to: [Object, String],
   target: String,
   icon: String,
   children: Array,
+  variant: {
+    type: String,
+    validator(value) {
+      return ['header', 'footer', 'testNav'].includes(value)
+    },
+    default: 'header'
+  }
+})
+
+const variant = computed(() => {
+    if(props.variant === "footer") {
+        return 'mb-1'
+    }
+    if(props.variant === "testNav") {
+       return 'mb-2'
+    }
+    return 'mb-3'
 })
 </script>
 

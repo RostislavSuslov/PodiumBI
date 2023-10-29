@@ -45,7 +45,7 @@ const data = computed(() => {
 
 const classes = computed(() => {
   return {
-    base: 'text-title_6 p-5 leading-none hover:text-primaryColor',
+    base: 'text-title_6 inline-block p-5 leading-none hover:text-primaryColor',
     secondary: "text-title_3 hover:text-green-500"
   }[props.color]
 })

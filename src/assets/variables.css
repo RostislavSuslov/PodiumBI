@@ -3,11 +3,12 @@
     --secondryColor:   #0f0;
     --fontPrimary: 'Roboto', sans-serif;
     --textColor: #111;
-    --title_1: 128px;
-    --title_2: 40px;
-    --title_3: 36px;
-    --title_4: 32px;
-    --title_5: 24px;
-    --title_6: 20px;
+
+    --title_1: 40px;
+    --title_2: 36px;
+    --title_3: 32px;
+    --title_4: 24px;
+    --title_5: 20px;
+    --title_6: 16px;
     --bg-body: #F7F8FB;
 }

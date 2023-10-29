@@ -1,9 +1,15 @@
 <script setup>
 import TheWelcome from '../components/TheWelcome.vue'
+import TemplateFirstScreen from "@/components/TemplateFirstScreen/TemplateFirstScreen.vue";
+import TemplateSliderReview from "@/components/TemplateSliderReview/TemplateSliderReview.vue";
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+<!--  <template-first-screen/>-->
+
+<!--  <template-slider-review/>-->
+<!--  <TemplateAdvantages/>-->
+<!--  <services-template/>-->
+<!--  <accordion-template/>-->
+  <app-footer-app-footer/>
 </template>

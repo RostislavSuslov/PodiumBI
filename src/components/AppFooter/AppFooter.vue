@@ -5,7 +5,7 @@
           <app-logo class="pt-1"></app-logo>
           <div>Copyright @ Podium BI 2023</div>
         </div>
-        <div class="footer-navigation flex font-fontSecondary max-w-[640px] w-full justify-between mb-16">
+        <div class="flex font-fontSecondary max-w-[640px] w-full justify-between mb-16">
             <nav>
               <h6 class="text-title_6 font-bold mb-3">Quick links</h6>
               <ul>
