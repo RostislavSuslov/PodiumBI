@@ -5,6 +5,7 @@
     <main>
       <slot>
         <RouterView/>
+        <TemplateFirstScreen/>
         <TemplateAccordion/>
        
         {{one}}

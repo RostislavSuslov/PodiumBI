@@ -7,8 +7,11 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AdvantageItem: typeof import('./src/components/AdvantageItem.vue')['default']
     AppFooter: typeof import('./src/components/AppFooter/AppFooter.vue')['default']
     AppHeader: typeof import('./src/components/AppHeader/AppHeader.vue')['default']
+    BaseAdvantages: typeof import('./src/components/BaseAdvantages.vue')['default']
+    BaseTitle: typeof import('./src/components/BaseTitle.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TemplateAccordion: typeof import('./src/components/TemplateAccordion/TemplateAccordion.vue')['default']
@@ -19,6 +22,7 @@ declare module 'vue' {
     TemplateSliderReview: typeof import('./src/components/TemplateSliderReview/TemplateSliderReview.vue')['default']
     TheWelcome: typeof import('./src/components/TheWelcome.vue')['default']
     UiAppLogo: typeof import('./src/components/ui/AppLogo.vue')['default']
+    UiIconsIconCheck: typeof import('./src/components/ui/icons/IconCheck.vue')['default']
     UiIconsIconCommunity: typeof import('./src/components/ui/icons/IconCommunity.vue')['default']
     UiIconsIconDocumentation: typeof import('./src/components/ui/icons/IconDocumentation.vue')['default']
     UiIconsIconEcosystem: typeof import('./src/components/ui/icons/IconEcosystem.vue')['default']
