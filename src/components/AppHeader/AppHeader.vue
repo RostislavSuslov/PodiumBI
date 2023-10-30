@@ -2,7 +2,7 @@
   <header class=" bg-black text-white">
       <div class="flex w-full max-w-[1464px] mx-auto px-3 py-6 pr-[60px]">
         <app-logo class="mr-[-57px]"></app-logo>
-        <template-nav :items="nav" variant="testNav"></template-nav>
+        <template-nav :items="nav" variant="header"></template-nav>
       </div>
   </header>
 </template>
@@ -17,7 +17,7 @@ const nav = [
   {
     text: 'Home',
     to: {name: 'home'},
-    children: [
+    /*children: [
       {
         text: 'Nested nav',
         href: 'https://google.com',
@@ -34,7 +34,7 @@ const nav = [
         text: 'Nested nav',
         href: 'https://google.com',
       },
-    ]
+    ]*/
   },
   {
     text: 'podium-bi-portal',

@@ -1,5 +1,5 @@
 <template>
-  <ul class="mx-auto flex">
+  <ul :class="classes">
     <template-nav-item v-for="(item, index) in items" v-bind="item" :key="index" :variant="variant">
       <template #link-text="data">
         <slot name="link-text" v-bind="data"/>
@@ -10,11 +10,28 @@
 
 <script setup>
 import TemplateNavItem from "@/components/ui/TemplateNavItem.vue";
+import {computed} from "vue";
 
-defineProps({
+const props = defineProps({
   items: Array,
   horizontal: Boolean,
-  variant: String,
+  variant: {
+    type: String,
+    validator(value) {
+      return ['header', 'footer', 'testNav'].includes(value)
+    },
+    default: 'header'
+  }
+})
+
+const classes = computed(() => {
+  if(props.variant === "footer") {
+      return 'flex-col'
+  }
+  if(props.variant === "testNav") {
+     return 'mb-12'
+  }
+  return 'mx-auto flex'
 })
 </script>
 

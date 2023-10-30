@@ -1,10 +1,11 @@
 <template>
-  <li :class="variant">
+  <li :class="classes">
     <template-link
         :href="href"
         :to="to"
         :target="target"
         v-bind="$attrs"
+        :variant="variant"
     >
       {{icon}}
       <slot name="link-text">
@@ -41,9 +42,9 @@ const props = defineProps({
   }
 })
 
-const variant = computed(() => {
+const classes = computed(() => {
     if(props.variant === "footer") {
-        return 'mb-1'
+        return 'mb-[6px]'
     }
     if(props.variant === "testNav") {
        return 'mb-2'

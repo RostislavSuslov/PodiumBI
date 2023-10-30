@@ -11,5 +11,5 @@ import TemplateSliderReview from "@/components/TemplateSliderReview/TemplateSlid
 <!--  <TemplateAdvantages/>-->
 <!--  <services-template/>-->
 <!--  <accordion-template/>-->
-  <app-footer-app-footer/>
+   
 </template>
