@@ -21,9 +21,9 @@ const props = defineProps({
   variant: {
     type: String,
     validator(value) {
-      return ['base', 'secondary', 'footer'].includes(value)
+      return ['header', 'secondary', 'footer'].includes(value)
     },
-    default: 'base'
+    default: 'header'
   }
 })
 
@@ -46,7 +46,7 @@ const data = computed(() => {
 
 const classes = computed(() => {
   return {
-    base: 'text-title_6 inline-block p-5 leading-none hover:text-primaryColor',
+    header: 'text-title_5 inline-block p-5 leading-none hover:text-primaryColor',
     secondary: "text-title_3 hover:text-green-500",
     footer: 'text-title_5 hover:text-red-500 p-1'
   }[props.variant]

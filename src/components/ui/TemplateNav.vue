@@ -31,7 +31,7 @@ const classes = computed(() => {
   if(props.variant === "testNav") {
      return 'mb-12'
   }
-  return 'mx-auto flex'
+  return 'mx-auto flex w-full justify-center'
 })
 </script>
 

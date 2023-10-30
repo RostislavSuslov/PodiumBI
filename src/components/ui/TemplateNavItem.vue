@@ -49,7 +49,7 @@ const classes = computed(() => {
     if(props.variant === "testNav") {
        return 'mb-2'
     }
-    return 'mb-3'
+    return ''
 })
 </script>
 
