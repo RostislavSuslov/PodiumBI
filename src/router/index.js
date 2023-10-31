@@ -4,6 +4,7 @@ import PodiumBiPortalView from '../views/PodiumBiPortalView.vue'
 import WalmartRetailDataView from '../views/WalmartRetailDataView.vue'
 import ContactView from '../views/ContactView.vue'
 import BlogView from '../views/BlogView.vue'
+import CustomLayout from '@/loyouts/CustomLayout.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -17,6 +18,7 @@ const router = createRouter({
       path: '/podium-bi-portal',
       name: 'podium-bi-portal',
       component: PodiumBiPortalView,
+     
     },
     {
       path: '/walmart-retail-data',
@@ -32,6 +34,10 @@ const router = createRouter({
       path: '/blog',
       name: 'blog',
       component: BlogView,
+      meta: {
+        private: true,
+        layout: CustomLayout,
+      }
     },
   /* {
       path: '/about',
@@ -44,4 +50,12 @@ const router = createRouter({
   ]
 })
 
+window.isAuth = false;
+
+router.beforeEach((to, from) => {
+  console.log(to, from);
+  if(to.meta.private){
+    return window.isAuth 
+  }
+})
 export default router

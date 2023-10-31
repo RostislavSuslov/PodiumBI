@@ -3,24 +3,10 @@
     
     <AppHeader/>
     <main>
-      <slot>
-        <RouterView/>
-        <TemplateFirstScreen/>
-        <TemplateAccordion/>
-       
-        {{one}}
-        <button @click="one++">add</button>
-      </slot>
-
+      <slot/>
     </main>
     <AppFooter/>
   </div>
 </template>
 
-<script setup>
-const one = ref(1);
-</script>
-
-<style scoped>
-
-</style>
+ 
