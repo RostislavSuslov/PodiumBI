@@ -1,15 +1,21 @@
-<script setup>
-    import AppLayout from './loyouts/AppLayout.vue'
-</script>
-
 <template>
   <RouterView v-slot="{ Component, route }">
-     
       <component :is="route.meta.layout ? route.meta.layout : AppLayout">
         <component v-if="Component" :is="Component"></component>
       </component>
   </RouterView>
+
+  <pre>{{movieStore.obj}}</pre>
 </template>
+
+
+<script setup>
+    import AppLayout from './layouts/AppLayout.vue';
+    import {useMovieStore} from '@/stores/MovieStore'
+
+    const movieStore = useMovieStore();
+</script>
+
 
 <style scoped lang="scss">
 </style>
