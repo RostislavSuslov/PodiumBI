@@ -3,8 +3,11 @@
       <div class="flex w-full max-w-[1464px] mx-auto px-3 py-6 pr-[60px]">
         <app-logo class="mr-[-57px]"></app-logo>
         <template-nav :items="nav" variant="header"></template-nav>
-        <button @click="authStore.onLogout" v-if="authStore.isAuth">LogOut</button>
-        <login-modal v-else/>
+        <div>
+          <button @click="authStore.onLogout" v-if="authStore.isAuth">LogOut</button>
+          <login-modal v-else/>
+          <registration-modal/>
+        </div>
       </div>
   </header>
 </template>
@@ -13,6 +16,7 @@
 import AppLogo from "@/components/ui/AppLogo.vue";
 import TemplateNav from "@/components/ui/TemplateNav.vue";
 import LoginModal from "@/components/ui/LoginModal.vue";
+import RegistrationModal from "@/components/ui/RegistrationModal.vue";
 import useAuthStore from '@/stores/authStore.js'
 
 const authStore = useAuthStore();
