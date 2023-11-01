@@ -1,6 +1,7 @@
 <template>
   <RouterView v-slot="{ Component, route }">
-      <component :is="route.meta.layout ? route.meta.layout : AppLayout">
+    <component :is="route.meta.layout ? route.meta.layout : AppLayout">
+        <pre>{{route.meta.layout}}</pre>
         <component v-if="Component" :is="Component"></component>
       </component>
   </RouterView>
