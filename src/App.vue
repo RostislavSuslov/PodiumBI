@@ -5,16 +5,26 @@
         <component v-if="Component" :is="Component"></component>
       </component>
   </RouterView>
-
-  <pre>{{movieStore.obj}}</pre>
 </template>
 
 
 <script setup>
     import AppLayout from './layouts/AppLayout.vue';
-    import {useMovieStore} from '@/stores/MovieStore'
+    import useAuthStore from '@/stores/authStore'
 
-    const movieStore = useMovieStore();
+
+    import {onMounted} from 'vue'
+    const authStore = useAuthStore();
+   
+    onMounted(()=>{
+      window.addEventListener("storage", (event) => {
+        if(event.key === "appAuth") {
+          const data = JSON.parse(event.newValue)
+          
+          authStore.setAuth(data.isAuth)
+        }
+      });
+    })
 </script>
 
 

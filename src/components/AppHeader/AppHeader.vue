@@ -3,10 +3,12 @@
       <div class="flex w-full max-w-[1464px] mx-auto px-3 py-6 pr-[60px]">
         <app-logo class="mr-[-57px]"></app-logo>
         <template-nav :items="nav" variant="header"></template-nav>
-        <div>
-          <button @click="authStore.onLogout" v-if="authStore.isAuth">LogOut</button>
-          <login-modal v-else/>
-          <registration-modal/>
+        <div class="grid justify-center items-center">
+          <button @click="authStore.onLogout" v-if="authStore.isAuth" class="whitespace-nowrap  hover:text-primaryColor">LogOut</button>
+          <template v-else>
+            <login-modal/>
+            <registration-modal/>
+          </template>
         </div>
       </div>
   </header>

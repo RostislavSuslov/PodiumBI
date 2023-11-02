@@ -1,5 +1,5 @@
 <template>
-  <button @click="open = true" >Registration</button>
+  <button @click="open = true" class="whitespace-nowrap hover:text-primaryColor">Registration</button>
   <!-- Sing Out -->
   <Teleport to="body">
     <div v-if="open" class="modal fixed top-0 left-0 z-50 w-full h-full flex items-center justify-center bg-white text-black">

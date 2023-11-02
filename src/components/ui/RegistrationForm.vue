@@ -29,7 +29,7 @@
   import { useForm } from 'vee-validate';
   import * as yup from 'yup';
   import { ref } from 'vue';
-  import useRegistrationStore from "@/stores/registrationStore.js"
+  import useAuthStore from "@/stores/authStore.js"
 
 
   const emit = defineEmits(['onCloseModal'])
@@ -37,7 +37,7 @@
       emit('onCloseModal');  
   }
 
-  const register = useRegistrationStore();
+  const auth = useAuthStore();
   
   const initialValue = {
     firstName: '',
@@ -60,7 +60,7 @@
 
   const req = async (values) => {
     try{
-      await register.onRegister(values)
+      await auth.onRegister(values)
       emit('onCloseModal');  
     }catch(error) {
       alert(error.message)
