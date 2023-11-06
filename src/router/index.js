@@ -70,7 +70,7 @@ const router = createRouter({
 window.isAuth = true;
 
 router.beforeEach((to, from) => {
-  console.log(to, from);
+  // console.log(to, from);
   if(to.meta.private){
     return window.isAuth 
   }

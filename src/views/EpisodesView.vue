@@ -1,13 +1,12 @@
 <template>
   <div class="container mx-auto" v-show="!loading">
-    <h1 class="text-title_1 mb-5">Episodes list:</h1>
+    <h1 class="text-title_1 mb-5">Posts list:</h1>
     <b v-if="loading">Loading...</b>
     <ul class=" grid grid-cols-5 gap-6">
-      <li v-for="episode in episodes" :key="episode.id" class=" p-5 border bg-black">
-        <router-link :to="'/episodes/' + episode.id"  class="flex flex-col text-center h-full text-white hover:text-primaryColor">
-          <span class="text-[24px] mb-4">{{ episode.name }}</span>
-          <span class="text-[20px] mt-auto"> {{ episode.air_date }}</span>
-          <span class="mt-auto"> {{ 'episodes:' + episode.id}}</span>
+      <li v-for="post in postDate" :key="post.id" class="p-5 border bg-black text-white ">
+        {{ post.title }}
+        <router-link :to="'/posts/' + post.id" class="flex flex-col text-center h-full text-white hover:text-primaryColor">
+          <span class="mt-auto"> {{ 'posts:' + post.id}}</span>
         </router-link>
       </li>
     </ul>
@@ -23,10 +22,10 @@ import { ref, computed } from 'vue';
 import apiRouter from '../api/apiRouter';
 import apiClient from '../api/apiClient';
 
-const episodeDate = ref({ results: [], info: {} });
-const episodes = computed(()=> episodeDate.value?.results || [])
-const prev = computed(()=> episodeDate.value?.info?.prev);
-const next = computed(()=> episodeDate.value?.info?.next);
+const postDate = ref({ results: [], info: {} });
+const posts = computed(()=> postDate.value?.results || [])
+const prev = computed(()=> postDate.value?.info?.prev);
+const next = computed(()=> postDate.value?.info?.next);
 const loading = ref(true);  
 
 const fetchData = async (url) => {
@@ -34,9 +33,9 @@ const fetchData = async (url) => {
 
   try {
     loading.value = true; 
-    const response = await ( url ? apiClient.get(url) : apiRouter.courses.index());
-    episodeDate.value = response.data;
-    console.log(episodeDate.value);
+    const response = await ( url ? apiClient.get(url) : apiRouter.posts.index());
+    postDate.value = response.data;
+    console.log(postDate.value);
   } catch (error) {
     console.error('Error:', error);
   } finally {

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const apiClient = axios.create({
-    baseURL: "https://rickandmortyapi.com/api/",
+    baseURL: "https://jsonplaceholder.typicode.com/",
     headers: {
         Accept: "application/json",
     }

@@ -12,6 +12,10 @@ const createApiRouter = (api = apiClient)=> {
         courses: {
             index: (params)=> api.get("courses", {params}),
             show: (id)=> api.get(`courses/${id}`),
+        },
+        posts: {
+            index: (params)=> api.get("posts", {params}),
+            show: (id)=> api.get(`posts/${id}`),
         }
     }
 }
