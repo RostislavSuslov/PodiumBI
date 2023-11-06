@@ -59,8 +59,8 @@ const nav = [
     to: {name: 'contact'}
   },
   {
-    text: 'users',
-    to: {name: 'users'}
+    text: 'episodes',
+    to: {name: 'episodes'}
   },
   {
     text: 'blog',

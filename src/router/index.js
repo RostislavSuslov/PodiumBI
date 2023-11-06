@@ -3,7 +3,9 @@ import HomeView from '../views/HomeView.vue'
 import PodiumBiPortalView from '../views/PodiumBiPortalView.vue'
 import WalmartRetailDataView from '../views/WalmartRetailDataView.vue'
 import ContactView from '../views/ContactView.vue'
-import UsersView from '../views/UsersView.vue'
+import EpisodesView from '../views/EpisodesView.vue'
+import SingleEpisodes from '../views/SingleEpisodes.vue'
+
 import BlogView from '../views/BlogView.vue'
 import CustomLayout from '@/layouts/CustomLayout.vue'
 
@@ -33,9 +35,17 @@ const router = createRouter({
       component: ContactView,
     },
     {
-      path: '/users',
-      name: 'users',
-      component: UsersView,
+      path: '/episodes',
+      name: 'episodes',
+      component: EpisodesView,
+    },
+    {
+      path: '/episodes/:id',
+      name: 'SingleEpisodes',
+      meta: {
+        isAuth: true,
+      },
+      component: SingleEpisodes,
     },
     {
       path: '/blog',
