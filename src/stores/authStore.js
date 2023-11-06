@@ -45,7 +45,7 @@ const useAuthStore = defineStore('appAuth',  ()=> {   //'appAuth' unique id. Can
         console.log(isAuth.value, form);
         // console.log(mockAuth);
     }
-   
+
     /*onLogout isAuth.value = false*/
     const onLogout = async () => {
         await new Promise((resolve) => {

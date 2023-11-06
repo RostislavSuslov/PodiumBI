@@ -50,13 +50,17 @@ const nav = [
     text: 'podium-bi-portal',
     to: {name: 'podium-bi-portal'}
   },
-  {
+ /* {
     text: 'walmart-retail-data',
     to: {name: 'walmart-retail-data'}
-  },
+  },*/
   {
     text: 'contact',
     to: {name: 'contact'}
+  },
+  {
+    text: 'users',
+    to: {name: 'users'}
   },
   {
     text: 'blog',
