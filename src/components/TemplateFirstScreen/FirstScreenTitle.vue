@@ -23,7 +23,7 @@ defineProps({
       <li>Unlimited Users</li>
       <li>Access Anywhere</li>
     </ul>
-    <img src="src/assets/img/first-screen.png" class="max-w-full h-auto" alt="Podium BI">
+    <img src="/assets/img/first-screen.png" class="max-w-full h-auto" alt="Podium BI">
   </div>
 </template>
 

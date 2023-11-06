@@ -1,6 +1,6 @@
 <template>
     <section
-        class="test bg-black text-white pt-[104px] bg-[url('src/assets/img/gradient-first-screen.png')] bg-center-bottom bg-scale-100 bg-no-repeat">
+        class="test bg-black text-white pt-[104px] bg-[url('/assets/img/gradient-first-screen.png')] bg-center-bottom bg-scale-100 bg-no-repeat">
         <div class="container max-w-[978px] min-h-[1628px] mx-auto px-3">
             <base-title title="Podium BI" subtitle="Your Data. Only Smarter." titleSize="large" />
             <base-advantages :items="advantages" :vertical="true" />
