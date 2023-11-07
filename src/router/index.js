@@ -35,12 +35,12 @@ const router = createRouter({
       component: ContactView,
     },
     {
-      path: '/episodes',
-      name: 'episodes',
+      path: '/posts',
+      name: 'posts',
       component: EpisodesView,
     },
     {
-      path: '/episodes/:id',
+      path: '/posts/:id',
       name: 'SingleEpisodes',
       meta: {
         isAuth: true,

@@ -3,9 +3,9 @@
     <h1 class="text-title_1 mb-5">Posts list:</h1>
     <b v-if="loading">Loading...</b>
     <ul class=" grid grid-cols-5 gap-6">
-      <li v-for="post in postDate" :key="post.id" class="p-5 border bg-black text-white ">
+      <li v-for="post in postDate" :key="post.id" class="p-5 border">
         {{ post.title }}
-        <router-link :to="'/posts/' + post.id" class="flex flex-col text-center h-full text-white hover:text-primaryColor">
+        <router-link :to="'/posts/' + post.id" class="flex flex-col text-center h-full hover:text-primaryColor">
           <span class="mt-auto"> {{ 'posts:' + post.id}}</span>
         </router-link>
       </li>
