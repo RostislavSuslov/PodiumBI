@@ -12,4 +12,16 @@ apiClient.interceptors.response.use((res)=> res, error => {
     return Promise.reject(error)
 } );
 
+
+// const apiClient2 = axios.create({
+//     baseURL: "https://s.staging.yourcourses.kalyna.dev/api/v1/",
+//     headers: {
+//         Accept: "application/json",
+//     },
+
+// }) 
+
+// console.log(apiClient2.get('courses'));
+
+
 export default apiClient
