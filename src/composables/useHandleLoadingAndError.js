@@ -1,11 +1,13 @@
 import {ref} from 'vue'
 
+export const getData = (data) => {
+    return data?.data || data
+} 
+
 const defaulOptions = {
     loading: true,
     initData: {},
-    getData(data) {
-        return data?.data || data
-    }
+    getData
 }
 
 const useHandleLoadingAndError = ( options = defaulOptions) => {
@@ -14,10 +16,10 @@ const useHandleLoadingAndError = ( options = defaulOptions) => {
     const data = ref(mergeOptions.initData); 
     const error = ref(null);
 
-    const handler = async (callBack =()=> Promise.resolve()) => {
+    const handler = async (callBack =()=> Promise.resolve()) => { // callback = function || promise
         try {
             loading.value = true;
-            const res = await callBack();
+            const res = await (typeof callBack === "function"? callBack(): callBack);
             data.value = mergeOptions.getData(res)
         } catch (e) {
             error.value = e

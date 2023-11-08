@@ -1,22 +1,19 @@
-// import { defineStore } from 'pinia';
+import {defineStore} from "pinia";
+import {ref} from "vue";
+import apiRouter from '../api/apiRouter';
+import apiClient from '../api/apiClient';
+import { getData } from "../composables/useHandleLoadingAndError";
 
-// export const usePostsStore = defineStore('posts', {
-//   state: () => ({
-//     loading: false,
-//     postData: null,
-//     prev: null,
-//     next: null,
-//   }),
+export const usePostsStore = defineStore('postsStore', () => {
+  const postData = ref(null)
 
-//   actions: {
-//     setLoading(loading) {
-//       this.loading = loading;
-//     },
+  const getPosts = async (url)=>  {
+    if(!postData.value) {
+      const res = await ( url ? apiClient.get(url) : apiRouter.posts.index())
+      postData.value = getData(res)
+    }
+  }
 
-//     setPostsData(data) {
-//       this.postData = data;
-//       this.prev = data.info.prev;
-//       this.next = data.info.next;
-//     },
-//   },
-// });
+
+  return { getPosts, postData }
+})

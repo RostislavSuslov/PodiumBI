@@ -38,16 +38,20 @@ import { useRoute } from 'vue-router';
 // import apiClient from '../api/apiClient.js'
 import apiRouter from '../api/apiRouter'
 import useHandleLoadingAndError from '@/composables/useHandleLoadingAndError'
+import { useSinglePostStore } from '@/stores/singlePostStore';
 
+const postStore = useSinglePostStore();
 const route = useRoute();
 const {loading, handler} = useHandleLoadingAndError();
  
 const post = ref({ post: [] });  
 const commentData = ref({ results: [], info: {} });  
 
-const fetchPost = async () => {
+const fetchPost = async (url) => {
     const response = await apiRouter.posts.show(route.params.id) //apiClient.get(`episode/${route.params.id}`);
     post.value = response.data;
+
+    handler(postStore.getPosts(url))
 }
 
 const fetchComment = async () => {

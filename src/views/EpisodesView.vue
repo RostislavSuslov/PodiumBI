@@ -3,7 +3,7 @@
     <h1 class="text-title_1 mb-5">Posts list:</h1>
     <b v-if="loading">Loading...</b>
     <ul class=" grid grid-cols-5 gap-6">
-      <li v-for="post in postData" :key="post.id" class="p-5 border">
+      <li v-for="post in postsData" :key="post.id" class="p-5 border">
         {{ post.title }}
         <router-link :to="'/posts/' + post.id" class="flex flex-col h-full hover:text-primaryColor">
           <b> {{ 'posts:' + post.id}}</b>
@@ -19,18 +19,23 @@
 
 <script setup>
 import { computed } from 'vue';
-import apiRouter from '../api/apiRouter';
-import apiClient from '../api/apiClient';
 import useHandleLoadingAndError from '@/composables/useHandleLoadingAndError'
+import { usePostsStore } from '@/stores/postsStore';
 
-const {loading, data: postData, handler} = useHandleLoadingAndError();
-const posts = computed(()=> postData.value?.results || [])
-const prev = computed(()=> postData.value?.info?.prev);
-const next = computed(()=> postData.value?.info?.next);
+const postsStore = usePostsStore();
 
-const fetchData = async (url) => {
-  const hand = await handler(()=> ( url ? apiClient.get(url) : apiRouter.posts.index()))
-  console.log(hand);
+console.log(postsStore);
+
+const {loading, handler} = useHandleLoadingAndError();
+const postsData = computed(()=> postsStore.postData)
+const prev = computed(()=> postsData.value?.info?.prev);
+const next = computed(()=> postsData.value?.info?.next);
+
+const fetchData = (url) => {
+  handler(postsStore.getPosts(url))       // Promis
+  // handler(()=> postsStore.getPosts(url))  // function
+  // handler(postsStore.getPosts)            // function
+
 };
 
 fetchData();
