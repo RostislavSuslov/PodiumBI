@@ -1,7 +1,7 @@
 <template>
     <div class="container mx-auto my-5">
         <h1 class="text-title_1 mb-5">ToDoList</h1>
-        <div class="flex"> 
+        <div class="flex"  v-if="auth.isAuth" > 
             <ul class="grid">
                 <li  v-for="user in usersData" :key="user.id">
                     <pre>{{user}}</pre>
@@ -37,7 +37,6 @@
                                 :checked="user.completed"
                                 @change="updateUserStatus(user)"
                                 >
-                                <!-- @change="updateUserStatus(user)"  -->
                                 <div class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" stroke-width="1">
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
@@ -63,30 +62,29 @@
             </form>
             </div>
         </div>
-        
+        <div v-else>
+            <h2 class="text-title_2">ToDoList is available only to registered users.</h2>
+        </div>
     </div>
 </template>
 
 <script setup>
 import apiRouter from '../api/apiRouter';
 import useHandleLoadingAndError from "@/composables/useHandleLoadingAndError.js";
+import useAuthStore from "@/stores/authStore.js"
 import {ref} from "vue";
 
-const USER_ID = 7;
-const selectedUser = ref();
 const usersData = ref()
-const toDoData = ref()
 const {loading, handler} = useHandleLoadingAndError()
 const newTask = ref("")
 const newTaskArr = ref([])
+const auth = useAuthStore();
+const USER_ID = auth.profile.id;
 
 const fetchData = async () => {
   const {data} = await handler(() => apiRouter.users.todos.index(USER_ID))
   usersData.value = data
- console.log(data);
   newTaskArr.value.push(data)
-  
-  console.log('arr 0', newTaskArr.value);
 };
 
 const addTask = async () => {
@@ -95,8 +93,6 @@ const addTask = async () => {
     }
     
     const newTaskTitle = newTask.value.replace(/\s+/g, ' ').trim()
-   
-   
     const newTaskObject = {
         userId: USER_ID,
         id: usersData.value.length + 1, 
@@ -105,9 +101,6 @@ const addTask = async () => {
     };
 
     usersData.value.push(newTaskObject);
-
-    console.log('arr newTaskTitle', newTaskArr.value);
-
     newTask.value = "";
     return newTaskObject;
 }
@@ -117,43 +110,8 @@ const removeTask = (taskId) => {
 }
 
 const updateUserStatus = (user) => {
-    user.completed = !user.completed; // Измените значение completed на противоположное
-    // Далее, если вам нужно отправить это изменение на сервер, вы можете добавить соответствующий код здесь.
+    user.completed = !user.completed;
 };
-
-// const fetchToDos = async () => {
-//     const {data} = await handler(() => apiRouter.users.todos.index(selectedUser.value))
-//     toDoData.value = data
-//     console.log(data);
-// };
-
-// const onSetToDos = (id) => {
-//   selectedUser.value = id
-//   if (id) {
-//     fetchToDos()
-//   }
-// };
-
-// const newTask = ref('')
-
-// const addTask = async () => {
-//   if (newTask.value.trim() === '') {
-//     return; // Не добавляем пустые задачи
-//   }
-
-//   const newTaskData = {
-//     title: newTask,
-//     completed: false // Новая задача начинается не выполненной
-//   };
-
-//   const { data } = await handler(() => apiRouter.users.todos.create(selectedUser.value, newTaskData));
-
-//   // После успешного добавления задачи, обновите список задач, чтобы отобразить новую задачу
-//   fetchToDos();
-
-//   // Очистите поле ввода
-//   newTask.value = '';
-//};
 
 fetchData();
 </script>

@@ -16,8 +16,9 @@ import {ref} from "vue";
 const useAuthStore = defineStore('appAuth',  ()=> {   //'appAuth' unique id. Can't be the same
     const users = ref([])
     const isAuth = ref(false);
+
     const profile = ref({
-        id: 1,
+        id: 7,
     })
 
     const setAuth = (auth) => {
