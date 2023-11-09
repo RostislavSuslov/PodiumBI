@@ -31,7 +31,7 @@ const useHandleLoadingAndError = ( options = defaulOptions) => {
             data:  data.value
         }
     } 
-    return {loading, data, error, handler}
+    return {loading, data, error, handler, getData}
 }
 
 export default useHandleLoadingAndError

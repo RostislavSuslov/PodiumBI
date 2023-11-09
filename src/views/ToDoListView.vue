@@ -1,9 +1,9 @@
 <template>
     <div class="container mx-auto my-5">
         <h1 class="text-title_1 mb-5">ToDoList</h1>
-        <div class="flex"  v-if="auth.isAuth" > 
+        <div class="flex"  v-if="authStore.isAuth" > 
             <ul class="grid">
-                <li  v-for="user in usersData" :key="user.id">
+                <li  v-for="user in toDoData" :key="user.id">
                     <pre>{{user}}</pre>
                 </li>
             </ul>
@@ -18,13 +18,13 @@
                 <button 
                     class="border border-green-500 p-4 w-full rounded-lg hover:bg-green-500"
                     type="button"
-                    @click="addTask">add item</button>
+                    @click="onAddTask(newTask)">add item</button>
             </form>
             <form class="border border-cyan-800 p-7 w-full mw-[700px] mx-auto rounded-lg grid gap-5 mb-5">
                 <h4 class="text-title_2">Task list:</h4>
                 <ul class="borderp-7 mx-auto rounded-lg grid gap-5 w-full">
                     <li class="flex items-center"
-                        v-for="user in usersData" :key="user.id"
+                        v-for="user in toDoData" :key="user.id"
                     >
                         <input 
                             class="border border-cyan-500 p-3 w-full rounded-lg"
@@ -35,7 +35,7 @@
                                 type="checkbox" 
                                 class="before:content[''] peer relative h-6 w-6 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-16 before:w-16 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-teal-500 checked:bg-teal-500 checked:before:bg-teal-500 hover:before:opacity-10"
                                 :checked="user.completed"
-                                @change="updateUserStatus(user)"
+                                @change="onСhangeTaskStatus(user)"
                                 >
                                 <div class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" stroke-width="1">
@@ -49,7 +49,7 @@
                             class=" before:content[''] peer relative h-6 w-6 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-16 before:w-16 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity hover:before:opacity-10"
                             type="button"
                             :id="user.id"
-                            @click="removeTask(user.id)"
+                            @click="onRemoveTask(user.id)"
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" xml:space="preserve">
                                     <circle fill="#4D4D4D" cx="64" cy="64" r="64"/>
@@ -69,49 +69,33 @@
 </template>
 
 <script setup>
-import apiRouter from '../api/apiRouter';
+//import apiRouter from '../api/apiRouter';
+import { ref, computed } from 'vue';
 import useHandleLoadingAndError from "@/composables/useHandleLoadingAndError.js";
 import useAuthStore from "@/stores/authStore.js"
-import {ref} from "vue";
 
-const usersData = ref()
-const {loading, handler} = useHandleLoadingAndError()
 const newTask = ref("")
-const newTaskArr = ref([])
-const auth = useAuthStore();
-const USER_ID = auth.profile.id;
+const authStore = useAuthStore();
+const {loading, handler} = useHandleLoadingAndError();
+const toDoData = computed(()=> authStore.usersData)
 
-const fetchData = async () => {
-  const {data} = await handler(() => apiRouter.users.todos.index(USER_ID))
-  usersData.value = data
-  newTaskArr.value.push(data)
+const fetchData = (url) => {
+    handler(() => authStore.getToDoData(url));          // function
 };
 
-const addTask = async () => {
-    if (newTask.value.trim() === '') {
-       return;  
-    }
-    
-    const newTaskTitle = newTask.value.replace(/\s+/g, ' ').trim()
-    const newTaskObject = {
-        userId: USER_ID,
-        id: usersData.value.length + 1, 
-        title: newTaskTitle,
-        completed: false,
-    };
-
-    usersData.value.push(newTaskObject);
-    newTask.value = "";
-    return newTaskObject;
+const onAddTask = (task) => {
+    authStore.addTask(task)
+    newTask.value = ""
 }
 
-const removeTask = (taskId) => {
-  usersData.value = usersData.value.filter((user) => user.id !== taskId);
+const onRemoveTask = (taskId) => {
+    authStore.removeTask(taskId)
 }
 
-const updateUserStatus = (user) => {
-    user.completed = !user.completed;
-};
+const onСhangeTaskStatus =(user)=>{
+    authStore.updateUserStatus(user)
+}
+
 
 fetchData();
 </script>
