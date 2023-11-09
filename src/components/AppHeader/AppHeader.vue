@@ -59,6 +59,10 @@ const nav = [
     to: {name: 'contact'}
   },
   {
+    text: 'ToDoList',
+    to: {name: 'ToDoList'}
+  },
+  {
     text: 'posts',
     to: {name: 'posts'}
   },

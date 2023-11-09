@@ -32,10 +32,9 @@ const prev = computed(()=> postsData.value?.info?.prev);
 const next = computed(()=> postsData.value?.info?.next);
 
 const fetchData = (url) => {
-  handler(postsStore.getPosts(url))       // Promis
+  handler(postsStore.getPosts(url))          // Promis
   // handler(()=> postsStore.getPosts(url))  // function
   // handler(postsStore.getPosts)            // function
-
 };
 
 fetchData();

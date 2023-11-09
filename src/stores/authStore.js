@@ -16,6 +16,9 @@ import {ref} from "vue";
 const useAuthStore = defineStore('appAuth',  ()=> {   //'appAuth' unique id. Can't be the same
     const users = ref([])
     const isAuth = ref(false);
+    const profile = ref({
+        id: 1,
+    })
 
     const setAuth = (auth) => {
         isAuth.value = auth
@@ -33,11 +36,12 @@ const useAuthStore = defineStore('appAuth',  ()=> {   //'appAuth' unique id. Can
         await new Promise((resolve, reject) => {
             setTimeout(() => {
                 const user =  getUser(form.email)
-                
+                console.log(typeof user);
                 if(!user || form.password !== user.password) {
                    return reject(new Error("invalid data"))
                 }
               resolve(true) ;
+
             }, 1000);
         }) 
        
@@ -74,7 +78,7 @@ const useAuthStore = defineStore('appAuth',  ()=> {   //'appAuth' unique id. Can
     }
 
     return {
-        users, isAuth, setAuth, onLogin, onLogout, onRegister,
+        profile, users, isAuth, setAuth, onLogin, onLogout, onRegister,
     }
  
 },{
