@@ -26,6 +26,7 @@ declare module 'vue' {
     TemplateServices: typeof import('./src/components/TemplateServices/TemplateServices.vue')['default']
     TemplateSliderReview: typeof import('./src/components/TemplateSliderReview/TemplateSliderReview.vue')['default']
     TheWelcome: typeof import('./src/components/TheWelcome.vue')['default']
+    UiAddTaskForm: typeof import('./src/components/ui/AddTaskForm.vue')['default']
     UiAppLogo: typeof import('./src/components/ui/AppLogo.vue')['default']
     UiBaseField: typeof import('./src/components/ui/BaseField.vue')['default']
     UiBaseFieldWrapper: typeof import('./src/components/ui/BaseFieldWrapper.vue')['default']
