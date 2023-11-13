@@ -4,7 +4,7 @@
           @change="onChange"
     >
     <div class="absolute bg-gray-700/50 text-white inset-0 flex items-center justify-center z-10" v-if="loading">
-        Loading...        
+        <BaseLoading :loadingStyle="'animation'"/>
     </div>
     <vee-valid-field
         name="title"
@@ -34,6 +34,7 @@
     import * as yup from "yup";
     import VeeValidField from "@/components/ui/VeeValidField.vue";
     import ControledField from "@/components/ui/ControledField.vue";
+    import BaseLoading from "@/components/ui/BaseLoading.vue";
     import useTodoStore from "@/stores/todoStore.js"
     import useHandleLoadingAndError from "@/composables/useHandleLoadingAndError.js";
    

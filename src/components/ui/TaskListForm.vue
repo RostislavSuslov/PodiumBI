@@ -1,5 +1,7 @@
 <template>
-    <div v-if="loading" class="">loading...</div>
+    <div v-if="loading">
+      <BaseLoading  :loadingStyle="'animation'"/>
+    </div>
     <div class="flex" v-else>
       <ul class="grid text-[12px] leading-3">
         <li tabindex="0" v-for="user in toDoData" :key="user.id">
@@ -26,7 +28,7 @@
     import useTodoStore from "@/stores/todoStore.js"
     import useHandleLoadingAndError from "@/composables/useHandleLoadingAndError.js";
     import EditTaskForm from '@/components/ui/EditTaskForm.vue';
-    
+    import BaseLoading from "@/components/ui/BaseLoading.vue";
     const todoStore = useTodoStore();
     const {loading, handler} = useHandleLoadingAndError();
     const toDoData = computed(() => todoStore.tasks)
