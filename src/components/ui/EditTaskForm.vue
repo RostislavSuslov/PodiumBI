@@ -34,15 +34,16 @@
     import * as yup from "yup";
     import VeeValidField from "@/components/ui/VeeValidField.vue";
     import ControledField from "@/components/ui/ControledField.vue";
-    import useAuthStore from "@/stores/authStore.js"
+    import useTodoStore from "@/stores/todoStore.js"
     import useHandleLoadingAndError from "@/composables/useHandleLoadingAndError.js";
+   
     const props = defineProps({
         title: String,
         completed: Boolean,
         toDoId: Number,
     })
     
-    const authStore = useAuthStore();
+    const todoStore = useTodoStore();
     const {loading, handler} = useHandleLoadingAndError();
     
     const initialValues = computed(()=>{
@@ -59,11 +60,11 @@
     const {values} = useForm({validationSchema, initialValues}) 
 
     const onChange =()=> {
-        handler(authStore.updateTask(props.toDoId, values))
+        handler(todoStore.updateTask(props.toDoId, values))
     }
 
     const onRemoveTask = () => {
-        handler(authStore.removeTask(props.toDoId))
+        handler(todoStore.removeTask(props.toDoId))
     }
 
 </script>

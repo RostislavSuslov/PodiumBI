@@ -20,24 +20,24 @@
 <script setup>
 import { Form } from "vee-validate";
 import * as yup from "yup";
-import useAuthStore from "@/stores/authStore.js"
+import useTodoStore from "@/stores/todoStore.js"
 import VeeValidField from "@/components/ui/VeeValidField.vue";
 import useHandleLoadingAndError from "@/composables/useHandleLoadingAndError.js";
 
 const {loading, handler} = useHandleLoadingAndError();
-const authStore = useAuthStore();
+const todoStore = useTodoStore();
 
 const initialValue = {
   title: "",
   completed: false,
 };
 
-const validationSchema = {
+const validationSchema = {  
   title: yup.string().required(),
 };
 
 const onSubmit = async (form, ctx) => {
-  const res = await handler(authStore.addTask(form));
+  const res = await handler(todoStore.addTask(form));
   if(!res.error) {
     ctx.resetForm()
   }

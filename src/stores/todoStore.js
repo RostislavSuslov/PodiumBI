@@ -25,10 +25,26 @@ const useTodoStore = defineStore('todoStore', () => {   //'todoStore' unique id.
     return newItam;
   }
 
+  const updateTask = async (form) => {
+    const res = await apiRouter.users.todos.update(authStore.profile.id, form);
+    tasks.value = tasks.value.map(item => item.id === authStore.profile.id ? res.data : item)
+    return res.data;
+  }
+
+  const removeTask = async (taskId) => {
+    await apiRouter.users.todos.delete(authStore.profile.value.id, taskId);
+    const index = tasks.value.findIndex((user) => user.id === taskId);
+    if (index !== -1) {
+      tasks.value.splice(index, 1);
+    }
+  }
+
   return {
     tasks,
-    addTask,
     getToDoData,
+    addTask,
+    updateTask,
+    removeTask,
   }
 })
 

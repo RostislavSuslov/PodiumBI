@@ -20,7 +20,7 @@ const useAuthStore = defineStore('appAuth', () => {   //'appAuth' unique id. Can
   const newTask = ref("")
   const usersData = ref(null)
   const profile = ref({
-    id: 6,
+    id: 7,
   })
   const {handler, getData} = useHandleLoadingAndError()
 
@@ -37,51 +37,31 @@ const useAuthStore = defineStore('appAuth', () => {   //'appAuth' unique id. Can
   }
 
   /*<ToDoList>*/
-  const getToDoData = async (url) => {
-    if (!usersData.value) {
-      const res = await handler(url ? apiClient.get(url) : apiRouter.users.todos.index(profile.value.id))
-      usersData.value = getData(res)
-      newTaskArr.value.push(res)
-    }
-  };
-
-  // const updateUserStatus = (user) => {
-  //   console.log('updateUserStatus');
-  //   user.completed = !user.completed;
-  //     newTaskArr.value = newTaskArr.value.map((item) => {
-  //       if (item.id === user.id) {
-  //         return {
-  //           ...item,
-  //           completed: !user.completed,
-  //         }
-  //       }
-  //       return item
-  //     })
+  // const getToDoData = async (url) => {
+  //   if (!usersData.value) {
+  //     const res = await handler(url ? apiClient.get(url) : apiRouter.users.todos.index(profile.value.id))
+  //     usersData.value = getData(res)
+  //     newTaskArr.value.push(res)
+  //   }
   // };
-
-  const addTask = async (form) => {
-    const res = await apiRouter.users.todos.create(profile.value.id, form);
-    const lastItemId = usersData.value[usersData.value.length -1].id;
-    const newItam = { 
-      ...res.data,
-      id: lastItemId >= res.data.id ?  lastItemId + 1 : res.data.id
-    }
-
-    usersData.value.push(newItam);
-    return newItam;
-  }
+ 
+  // const addTask = async (form) => {
+  //   const res = await apiRouter.users.todos.create(profile.value.id, form);
+  //   const lastItemId = usersData.value[usersData.value.length -1].id;
+  //   const newItam = { 
+  //     ...res.data,
+  //     id: lastItemId >= res.data.id ?  lastItemId + 1 : res.data.id
+  //   }
+  //   usersData.value.push(newItam);
+  //   return newItam;
+  // }
 
   const updateTask = async (idTask, form) => {
     const res = await apiRouter.users.todos.update(idTask, form);
     usersData.value = usersData.value.map(item => item.id === idTask ? res.data : item)
     return res.data;
   }
-  /* old */
-  // const removeTask = (taskId) => {
-  //   const index = usersData.value.findIndex((user) => user.id === taskId);  
-  //   if (index !== -1) {
-  //     usersData.value.splice(index, 1);  }
-  // }
+ 
 
   const removeTask = async (taskId) => {
     // Виклик методу delete з apiRouter
@@ -170,8 +150,8 @@ const useAuthStore = defineStore('appAuth', () => {   //'appAuth' unique id. Can
     onRegister,
    // updateUserStatus,
     removeTask,
-    addTask,
-    getToDoData,
+    // addTask,
+    // getToDoData,
     updateTask,
   }
 
