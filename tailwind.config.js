@@ -9,6 +9,7 @@ module.exports = {
       colors: {
         primaryColor:   'var(--primaryColor)',
         secondaryColor: 'var(--secondaryColor)',
+        bgBody:         'var(--bgBody)',
       },
       fontSize: {
         title_1:              'var(--title_1)',

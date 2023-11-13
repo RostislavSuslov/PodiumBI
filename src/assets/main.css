@@ -12,5 +12,5 @@ html{
 body {
     font-family: var(--fontPrimary);
     color: var(--textColor);
-    background-color: var(--bg-body);
+    background-color: var(--bgBody);
 }

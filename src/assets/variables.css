@@ -3,6 +3,7 @@
     --secondryColor:   #0f0;
     --fontPrimary: 'Roboto', sans-serif;
     --textColor: #111;
+    --bgBody: #F7F8FB;
 
     --title_1: 40px;
     --title_2: 36px;
@@ -10,5 +11,4 @@
     --title_4: 24px;
     --title_5: 20px;
     --title_6: 16px;
-    --bg-body: #F7F8FB;
 }

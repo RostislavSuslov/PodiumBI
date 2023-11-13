@@ -33,12 +33,13 @@ const createApiRouter = (api = apiClient) => {
       index: (params) => api.get("users", {params}),
       show: (id) => api.get(`users/${id}`),
       todos: {
-        index: (id, params) => api.get(`users/${id}/todos`, {params}),
+        index: (id, params) => api.get(`users/${id}/todos`, {params}),  
         show: (id) => api.get(`todos/${id}`),
-        create: (id, data) => api.post( `users/${id}/todos`, data)
+        create: (id, data) => api.post( `users/${id}/todos`, data),  
+        delete: (taskId) => api.delete(`todos/${taskId}`),
+        update: (taskId, data) => api.put(`todos/${taskId}`, data),
       }
     },
-
   }
 }
 
