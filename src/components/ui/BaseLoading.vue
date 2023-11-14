@@ -1,5 +1,5 @@
 <template>
-    <div :class="loadingStyle">
+    <div class="text-title_4" :class="loadingStyle">
         Loading...
     </div>
 </template>
@@ -16,11 +16,11 @@
         }
     })
 
-  const loadingStyle = computed(() => {
-    return {
-        text: 'text222',
-        animation: 'animate-bounce',
-    } [props.loadingStyle]
-  })
+    const loadingStyle = computed(() => {
+      return {
+          text: 'text222',
+          animation: 'animate-bounce',
+      } [props.loadingStyle]
+    })
 
 </script>

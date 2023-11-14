@@ -44,6 +44,7 @@ declare module 'vue' {
     UiIconsIconSupport: typeof import('./src/components/ui/icons/IconSupport.vue')['default']
     UiIconsIconTooling: typeof import('./src/components/ui/icons/IconTooling.vue')['default']
     UiIconsLogo: typeof import('./src/components/ui/icons/Logo.vue')['default']
+    UiInputWrapper: typeof import('./src/components/ui/InputWrapper.vue')['default']
     UiLink: typeof import('./src/components/ui/Link.vue')['default']
     UiLoginForm: typeof import('./src/components/ui/LoginForm.vue')['default']
     UiLoginForm2: typeof import('./src/components/ui/LoginForm2.vue')['default']
