@@ -3,14 +3,16 @@
           @submit.prevent 
           @change="onChange"
     >
-    <div class="absolute bg-gray-700/50 text-white inset-0 flex items-center justify-center z-10" v-if="loading">
+    <!-- <div class="absolute bg-gray-700/50 text-white inset-0 flex items-center justify-center z-10" v-if="loading">
         <BaseLoading :loadingStyle="'animation'"/>
-    </div>
+    </div> -->
     <vee-valid-field
         name="title"
     />
     <controled-field 
         name="completed"
+        label="label"
+        :id="'userId-' + toDoId"
     />
       <div class="relative flex cursor-pointer items-center rounded-full p-3">
         <button
@@ -29,7 +31,7 @@
     </form>
 </template>
 <script setup>
-    import {computed} from 'vue'
+    import {computed, ref} from 'vue'
     import {useForm} from 'vee-validate';
     import * as yup from "yup";
     import VeeValidField from "@/components/ui/VeeValidField.vue";
@@ -37,7 +39,10 @@
     import BaseLoading from "@/components/ui/BaseLoading.vue";
     import useTodoStore from "@/stores/todoStore.js"
     import useHandleLoadingAndError from "@/composables/useHandleLoadingAndError.js";
+    
+    
    
+
     const props = defineProps({
         title: String,
         completed: Boolean,
@@ -53,6 +58,9 @@
             completed: props.completed,
         }
     })
+
+
+    
     
     const validationSchema = {
         title: yup.string().required(),
