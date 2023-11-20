@@ -7,10 +7,13 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AccordionItem: typeof import('./src/components/AccordionItem.vue')['default']
+    AccordionWrapper: typeof import('./src/components/AccordionWrapper.vue')['default']
     AdvantageItem: typeof import('./src/components/AdvantageItem.vue')['default']
     AppFooter: typeof import('./src/components/AppFooter/AppFooter.vue')['default']
     AppHeader: typeof import('./src/components/AppHeader/AppHeader.vue')['default']
     AppLayout: typeof import('./src/layouts/AppLayout.vue')['default']
+    BaseAccordion: typeof import('./src/components/BaseAccordion.vue')['default']
     BaseAdvantages: typeof import('./src/components/BaseAdvantages.vue')['default']
     BaseTitle: typeof import('./src/components/BaseTitle.vue')['default']
     BaseWrapper: typeof import('./src/components/BaseWrapper.vue')['default']

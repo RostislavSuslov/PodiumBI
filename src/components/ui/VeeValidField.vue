@@ -1,5 +1,5 @@
 <template>
-    <InputWrapper :label="label">
+    <InputWrapper :label="label" :name="name" > 
         <div class="w-full relative mx-auto py-4"  >
             <Field :name="name" 
             :id="id"
@@ -10,10 +10,6 @@
             :class="classes"
             class="border border-cyan-500 p-4 w-full rounded-lg peer"
             />
-            
-            <ErrorMessage class="text-red-600" :name="name"/>
-         
-           
         </div>
     </InputWrapper>
 </template>

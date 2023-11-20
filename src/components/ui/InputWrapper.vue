@@ -5,9 +5,12 @@
        :placeholder="placeholder"
        ></slot>
       <base-label :for="labelForInput" :label="label" :class="labelPosition" />  
-      <i class=" z-0 fas fa-pen-nib absolute left-8 top-14"></i>
-      <i class=" z-0 fas fa-pen-nib absolute right-8 top-14"></i>
-      <i class=" z-0 fas fa-pen-nib absolute right-[50%] top-14"></i>
+      <slot name="errorMessage">
+        <ErrorMessage class="text-red-600" v-if="name" :name="name"/>
+      </slot>
+      <!-- <i class="fas fa-pen-nib absolute left-8 top-14"></i>
+      <i class="fas fa-pen-nib absolute right-8 top-14"></i>
+      <i class="fas fa-pen-nib absolute right-[50%] top-14"></i> -->
   </div>
 </template>
 
@@ -23,6 +26,7 @@
       labelForInput: String,
       label: String,
       class: String,
+      name: String, 
       labelPosition: {
           type: String,
           validator(value) {

@@ -10,8 +10,8 @@
           name="title"
           placeholder="Add task"
           label="Write task"
-          id="TEST"
-          labelForInput="TEST"
+          id="test"
+          labelForInput="test"
           labelPosition="BottomLeft"
           classes="case3"
         />
