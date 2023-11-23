@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="overflow-hidden rounded-[20px]">
     <slot name="header" :toggle="onToggle" :isExpanded="isExpanded">
-      <button @click="onToggle" class="relative flex flex-wrap gap-3 justify-between items-center pl-[30px] py-[30px] pr-24 bg-white w-full rounded-[20px]">
+      <button @click="onToggle" class="relative flex flex-wrap gap-3 justify-between items-center pl-[30px] py-[30px] pr-24 bg-white w-full">
         <span v-if="title" class="text-left text-4xl block">
           {{title}}
         </span>
@@ -30,7 +30,7 @@ const props = defineProps({
 const emit = defineEmits(['toggle']);
 const bodyClass = computed(() => {
   return [
-    'border-2 rounded-b-xl border-gray-300 overflow-hidden',
+    'bg-white p-[30px] overflow-hidden',
     {
       '!hidden': !props.isExpanded,
     }
