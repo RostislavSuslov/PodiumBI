@@ -1,19 +1,19 @@
 <template>
-  <transition-group tag="div" name="list" class="flex flex-col gap-4">
-    <accordion-item v-for="(item, index) in items"
-                    :key="index"
-                    :isExpanded="hasItem(index)"
-                    :title="item?.title"
-                    @toggle="onToggleItem(index)"
-                    :body="item?.body">
-      <template #header="{toggle, isExpanded}">
-        <slot name="header" :toggle="toggle" :item="item" :isExpanded="isExpanded"/>
-      </template>
-      <template #default="{isExpanded, bodyClass}">
-        <slot name="body" :item="item" :isExpanded="isExpanded" :bodyClass="bodyClass"/>
-      </template>
-    </accordion-item>
-  </transition-group>
+    <transition-group tag="div" name="list" class="flex flex-col gap-[30px]">
+      <accordion-item v-for="(item, index) in items"
+                      :key="index"
+                      :isExpanded="hasItem(index)"
+                      :title="item?.title"
+                      @toggle="onToggleItem(index)"
+                      :body="item?.body">
+        <template #header="{toggle, isExpanded}">
+          <slot name="header" :toggle="toggle" :item="item" :isExpanded="isExpanded"/>
+        </template>
+        <template #default="{isExpanded, bodyClass}">
+          <slot name="body" :item="item" :isExpanded="isExpanded" :bodyClass="bodyClass"/>
+        </template>
+      </accordion-item>
+    </transition-group>
 </template>
 
 <script setup>

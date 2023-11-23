@@ -1,17 +1,19 @@
 <template>
     <TemplateFirstScreen/>
-    <div class="m-10">
-      <AccordionWrapper :items="accordionList">
-        <template #body="{bodyClass, item}">
-          <div class="grid grid-cols-[120px_1fr] gap-4" :class="bodyClass">
-            <img :src="item.content.img" />
-            <p>
-              {{item.content.description}}
-            </p>
-          </div>
-        </template>
-      </AccordionWrapper>
-    </div>
+    <section class="mb-24">
+      <div class="container mx-auto px-4 max-w-[986px]">
+        <AccordionWrapper :items="accordionList">
+          <template #body="{bodyClass, item}">
+            <div class="grid grid-cols-[120px_1fr] gap-4" :class="bodyClass">
+              <img :src="item.content.img" />
+              <p>
+                {{item.content.description}}
+              </p>
+            </div>
+          </template>
+        </AccordionWrapper>
+      </div>
+    </section>
 </template>
 
 <script setup>
