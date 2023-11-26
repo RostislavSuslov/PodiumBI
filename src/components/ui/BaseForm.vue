@@ -1,0 +1,135 @@
+<template>
+  <div>
+
+    <form
+        @submit="onSubmit"
+        class="flex flex-col items-center border-2 px-6 py-10 max-w-xl mx-auto mb-6 rounded-[4px]"
+    >
+      <text-field
+          type="email"
+          name="email"
+          label="Email"
+          placeholder="Your email"
+      />
+      <password-field
+          :type="showPassword ? 'text' : 'password'"
+          name="password"
+          label="password"
+          placeholder="Your password"
+      />
+      <div class="flex items-center my-2">
+        <input
+            type="checkbox"
+            class="form-checkbox h-5 w-5 text-green-500"
+            id="togglePassword"
+            v-model="showPassword"
+        />
+        <label for="togglePassword" class="ml-2">Show Password</label>
+      </div>
+      <BaseButton :disabled="loading">Submit</BaseButton>
+
+
+      <pre>{{ errors }}</pre>
+      <pre>{{ values }}</pre>
+    </form>
+
+    <teleport to="body">
+      <BaseModal
+          :open-modal="openModal"
+          @confirm="submitForm"
+          @update:open-modal="onChangeModal"
+      />
+    </teleport>
+    <div class="flex justify-center my-12">
+      <BasePopup popupPosition="bottomLeft" text="User successfully registered" />
+      <PopUpWrapper>
+        <template #body>
+          <div>
+            <div>
+              <h5 class="text-title_5 mb-[30px]">
+                  Good work!
+              </h5>
+            </div>
+            <div>
+              <img src="" alt="img"/>
+            </div>
+          </div>
+        </template>
+      </PopUpWrapper>
+    </div>
+  </div>
+</template>
+<script setup>
+import { ref } from "vue";
+import * as yup from "yup";
+import { useForm } from "vee-validate";
+import TextField from "@/components/ui/TextField.vue";
+import PasswordField from "@/components/ui/PasswordField.vue";
+import BaseModal from "@/components/ui/BaseModal.vue";
+import randomGenerator from "@/utils/randomGenerator";
+import BaseButton from "@/components/ui/BaseButton.vue";
+import apiRouter from "@/api/apiRouter.js";
+import BasePopup from "@/components/ui/BasePopup.vue";
+import PopUpWrapper from "@/components/ui/PopUpWrapper.vue"
+
+defineProps({
+  modelValue: String,
+});
+
+const loading = ref(false);
+const showPassword = ref(false);
+const openModal = ref(false);
+
+const initialValue = {
+  email: "",
+  password: "",
+};
+
+const { handleSubmit, values, errors, resetForm } = useForm({
+  initialValues: initialValue,
+  validationSchema: yup.object({
+    email: yup.string().required().email(),
+    password: yup.string().required().min(6),
+  }),
+});
+
+const submitForm = async () => {
+  loading.value = true;
+
+  try {
+    await new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (randomGenerator()) {
+          resolve();
+          return;
+        }
+        reject("myError");
+      }, 800);
+    });
+    const data = JSON.stringify(values, null, 2)
+    apiRouter.auth.login(data.value)
+    console.log(data);
+    resetForm();
+  } catch (error) {
+
+    console.log(error);
+  } finally {
+    loading.value = false;
+  }
+};
+const onChangeModal = (newVal) => {
+  openModal.value = newVal;
+};
+
+const onSubmit = handleSubmit(() => {
+  onChangeModal(true);
+});
+
+
+
+
+
+
+
+
+</script>

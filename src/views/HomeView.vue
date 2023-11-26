@@ -1,5 +1,6 @@
 <template>
     <TemplateFirstScreen/>
+    <BaseForm/>
     <section class="mb-24">
       <div class="container mx-auto px-4 max-w-[986px]">
         <AccordionWrapper :items="accordionList">
@@ -25,6 +26,7 @@
     import TemplateFirstScreen from "@/components/TemplateFirstScreen/TemplateFirstScreen.vue";
     import AccordionWrapper from "@/components/ui/AccordionWrapper.vue";
     import PrepareButton from "@/components/PrepareButton.vue";
+    import BaseForm from "@/components/ui/BaseForm.vue";
 
     const accordionList = [
       {

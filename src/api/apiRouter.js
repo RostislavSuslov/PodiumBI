@@ -1,4 +1,4 @@
-import apiClient from "./apiClient"
+import apiClient, {getCSRF} from "./apiClient"
 
 const createApiRouter = (api = apiClient) => {
   return {
@@ -13,6 +13,15 @@ const createApiRouter = (api = apiClient) => {
     //   index: (params)=> api.get("courses", {params}),
     //   show: (id)=> api.get(`courses/${id}`),
     // },
+    auth: {
+     login: async (data)=> {
+        await getCSRF()
+       console.log(data)
+        /*після успішного виконання логіну, треба в локас-сторедж записати що юзер авторизований*/
+        return await api.post("/login", data)
+      },
+     me: ()=> api.get("/me") //запит, якщо залогинений
+    },
     posts: {
       index: (params) => api.get("posts", {params}),
       show: (id) => api.get(`posts/${id}`),
@@ -43,5 +52,5 @@ const createApiRouter = (api = apiClient) => {
   }
 }
 
-export default createApiRouter();
-/* controller */
+window.apiRouter = createApiRouter();
+export default window.apiRouter;
