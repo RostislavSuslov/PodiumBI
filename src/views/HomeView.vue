@@ -1,6 +1,21 @@
 <template>
     <TemplateFirstScreen/>
-    <BaseForm/>
+    <BaseForm @showModal="showPopUp"/>
+    <BasePopup openPopup="openPopup"/>
+  <!--      <PopUpWrapper popupPosition="topRight">-->
+  <!--        <template #body>-->
+  <!--          <div> -->
+  <!--            <div>-->
+  <!--              <h5 class="text-title_5 mb-[30px]">-->
+  <!--                  Good work!-->
+  <!--              </h5>-->
+  <!--            </div>-->
+  <!--            <div>-->
+  <!--              <img src="https://placehold.co/400" alt="img"/>-->
+  <!--            </div>-->
+  <!--          </div>-->
+  <!--        </template>-->
+  <!--      </PopUpWrapper>-->
     <section class="mb-24">
       <div class="container mx-auto px-4 max-w-[986px]">
         <AccordionWrapper :items="accordionList">
@@ -27,6 +42,17 @@
     import AccordionWrapper from "@/components/ui/AccordionWrapper.vue";
     import PrepareButton from "@/components/PrepareButton.vue";
     import BaseForm from "@/components/ui/BaseForm.vue";
+    import BasePopup from "@/components/ui/BasePopup.vue";
+    import {computed, ref} from "vue";
+
+    const openPopup = ref(false);
+
+    const setOpenPopup = () => {
+      openPopup.value = true;
+    }
+
+
+
 
     const accordionList = [
       {

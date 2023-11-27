@@ -19,7 +19,8 @@ const createApiRouter = (api = apiClient) => {
         /*після успішного виконання логіну, треба в локас-сторедж записати що юзер авторизований*/
         return await api.post("/login", data)
       },
-     me: ()=> api.get("/me") //запит, якщо залогинений
+     me: ()=> api.get("/me"), //запит, якщо залогинений
+     // logout: ()=> api.get("/logout"),
     },
     posts: {
       index: (params) => api.get("posts", {params}),

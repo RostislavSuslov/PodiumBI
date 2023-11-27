@@ -6,6 +6,7 @@
         :placeholder="placeholder"
         :class="fieldClasses"
         v-model="innerValue"
+        value="andrew@easlerlaw.com"
     />
   </field-wrapper>
 </template>
