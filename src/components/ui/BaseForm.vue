@@ -70,6 +70,9 @@ import apiRouter from "@/api/apiRouter.js";
 import BasePopup from "@/components/ui/BasePopup.vue";
 import PopUpWrapper from "@/components/ui/PopUpWrapper.vue"
 import useHandleLoadingAndError from "@/composables/useHandleLoadingAndError";
+import useAuthStore from '@/stores/authStore.js'
+
+const authStore = useAuthStore();
 
 defineProps({
   modelValue: String,
@@ -78,7 +81,7 @@ defineProps({
 
 const showPassword = ref(false);
 const openModal = ref(false);
-const userName = ref("")
+
 
 const initialValue = {
   email: "",
@@ -98,6 +101,7 @@ const submitForm = async () => {
 
   try {
     await apiRouter.auth.login(values)
+
     resetForm();
   } catch (error) {
 
@@ -113,8 +117,9 @@ const {handler, loading, error} = useHandleLoadingAndError()
 
 const onSubmit =  handleSubmit(async (data, {resetForm}) => {
   const res =  await handler(apiRouter.auth.login(data))
-  userName.value = res.data.data.first_name
-  console.log(userName)
+  authStore.usersName = res.data.data.first_name
+  console.log(authStore.usersName)
+
   if (!res.error) {
 
 

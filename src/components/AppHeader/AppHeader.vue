@@ -9,7 +9,7 @@
             <login-modal/>
             <registration-modal/>
           </template>
-<!--          {{userName}}-->
+          {{authStore.usersName}}
         </div>
       </div>
   </header>

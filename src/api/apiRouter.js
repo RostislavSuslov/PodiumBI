@@ -16,7 +16,6 @@ const createApiRouter = (api = apiClient) => {
     auth: {
      login: async (data)=> {
         await getCSRF()
-       console.log(data)
         /*після успішного виконання логіну, треба в локас-сторедж записати що юзер авторизований*/
         return await api.post("/login", data)
       },
