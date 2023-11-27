@@ -28,6 +28,7 @@
       </div>
       <BaseButton :disabled="loading">Submit</BaseButton>
       <pre>{{ error }}</pre>
+      <pre>{{userName}}</pre>
     </form>
 
     <teleport to="body">
@@ -77,6 +78,7 @@ defineProps({
 
 const showPassword = ref(false);
 const openModal = ref(false);
+const userName = ref("")
 
 const initialValue = {
   email: "",
@@ -108,20 +110,16 @@ const onChangeModal = (newVal) => {
   openModal.value = newVal;
 };
 const {handler, loading, error} = useHandleLoadingAndError()
+
 const onSubmit =  handleSubmit(async (data, {resetForm}) => {
   const res =  await handler(apiRouter.auth.login(data))
+  userName.value = res.data.data.first_name
+  console.log(userName)
   if (!res.error) {
-    console.log(res.data)
+
 
     resetForm()
   }
 });
-
-
-
-
-
-
-
 
 </script>

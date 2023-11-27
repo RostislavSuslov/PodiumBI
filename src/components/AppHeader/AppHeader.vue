@@ -9,6 +9,7 @@
             <login-modal/>
             <registration-modal/>
           </template>
+<!--          {{userName}}-->
         </div>
       </div>
   </header>
@@ -20,8 +21,10 @@ import TemplateNav from "@/components/ui/TemplateNav.vue";
 import LoginModal from "@/components/ui/LoginModal.vue";
 import RegistrationModal from "@/components/ui/RegistrationModal.vue";
 import useAuthStore from '@/stores/authStore.js'
+// import {userName} from '@/components/ui/BaseForm.vue'
 
 const authStore = useAuthStore();
+
 
 const nav = [
   {
