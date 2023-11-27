@@ -4,7 +4,8 @@ import {ref} from "vue";
 const useAuthStore = defineStore('appAuth', () => {   //'appAuth' unique id. Can't be the same
   const users = ref([])
   const isAuth = ref(false);
-  const usersData = ref(null)
+
+
   const profile = ref({
     id: 7,
   })
@@ -67,7 +68,7 @@ const useAuthStore = defineStore('appAuth', () => {   //'appAuth' unique id. Can
     profile,
     users,
     isAuth,
-    usersData,
+
     setAuth,
     onLogin,
     onLogout,

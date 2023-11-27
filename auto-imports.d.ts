@@ -6,6 +6,8 @@
 export {}
 declare global {
   const EffectScope: typeof import('vue')['EffectScope']
+  const MessagesError: typeof import('./src/globals/MessagesError')['MessagesError']
+  const TMessagesError: typeof import('./src/globals/MessagesError')['TMessagesError']
   const computed: typeof import('vue')['computed']
   const createApp: typeof import('vue')['createApp']
   const customRef: typeof import('vue')['customRef']

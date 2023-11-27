@@ -1,22 +1,18 @@
 <template>
-  <BaseButton @click="togglePopup">open popUp</BaseButton>
-  <transition name="fade" class="transition-opacity">
-    <div v-if="isPopupVisible" :class="popupPosition" class="fixed bg-white p-8 border border-gray-300 shadow-md transition-transform duration-500 ease-out">
-      <slot name="header">
-        <span @click="togglePopup" class="absolute top-2 right-2 cursor-pointer text-gray-500">&times;</span>
-        <p>{{ text }}</p>
-      </slot>
-      <slot>
-        <div><a href="#">show more...</a></div>
-      </slot>
-    </div>
-  </transition>
+  <div class="z-10">
+    <BaseButton @click="togglePopup">open popUp</BaseButton>
+    <transition name="fade" class="transition-opacity">
+      <div v-if="isPopupVisible" :class="popupPosition" class="fixed bg-white p-8 border border-gray-300 shadow-md transition-transform duration-500 ease-out">
+          <span @click="togglePopup" class="absolute top-2 right-2 cursor-pointer text-gray-500">&times;</span>
+        <slot/>
+      </div>
+    </transition>
+  </div>
 </template>
 
 <script setup>
 import BaseButton from "@/components/ui/BaseButton.vue";
 import {computed, ref} from "vue";
-
 
 const isPopupVisible = ref(false);
 
@@ -25,7 +21,6 @@ const togglePopup = () => {
 };
 
 const props = defineProps({
-  text: String,
   popupPosition: {
     type: String,
     validator(value) {

@@ -27,10 +27,7 @@
         <label for="togglePassword" class="ml-2">Show Password</label>
       </div>
       <BaseButton :disabled="loading">Submit</BaseButton>
-
-
-      <pre>{{ errors }}</pre>
-      <pre>{{ values }}</pre>
+      <pre>{{ error }}</pre>
     </form>
 
     <teleport to="body">
@@ -41,8 +38,8 @@
       />
     </teleport>
     <div class="flex justify-center my-12">
-      <BasePopup popupPosition="bottomLeft" text="User successfully registered" />
-      <PopUpWrapper>
+
+      <PopUpWrapper popupPosition="topRight">
         <template #body>
           <div>
             <div>
@@ -51,7 +48,7 @@
               </h5>
             </div>
             <div>
-              <img src="" alt="img"/>
+              <img src="https://placehold.co/400" alt="img"/>
             </div>
           </div>
         </template>
@@ -66,17 +63,18 @@ import { useForm } from "vee-validate";
 import TextField from "@/components/ui/TextField.vue";
 import PasswordField from "@/components/ui/PasswordField.vue";
 import BaseModal from "@/components/ui/BaseModal.vue";
-import randomGenerator from "@/utils/randomGenerator";
+
 import BaseButton from "@/components/ui/BaseButton.vue";
 import apiRouter from "@/api/apiRouter.js";
 import BasePopup from "@/components/ui/BasePopup.vue";
 import PopUpWrapper from "@/components/ui/PopUpWrapper.vue"
+import useHandleLoadingAndError from "@/composables/useHandleLoadingAndError";
 
 defineProps({
   modelValue: String,
 });
 
-const loading = ref(false);
+
 const showPassword = ref(false);
 const openModal = ref(false);
 
@@ -97,18 +95,7 @@ const submitForm = async () => {
   loading.value = true;
 
   try {
-    await new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (randomGenerator()) {
-          resolve();
-          return;
-        }
-        reject("myError");
-      }, 800);
-    });
-    const data = JSON.stringify(values, null, 2)
-    apiRouter.auth.login(data.value)
-    console.log(data);
+    await apiRouter.auth.login(values)
     resetForm();
   } catch (error) {
 
@@ -120,9 +107,14 @@ const submitForm = async () => {
 const onChangeModal = (newVal) => {
   openModal.value = newVal;
 };
+const {handler, loading, error} = useHandleLoadingAndError()
+const onSubmit =  handleSubmit(async (data, {resetForm}) => {
+  const res =  await handler(apiRouter.auth.login(data))
+  if (!res.error) {
+    console.log(res.data)
 
-const onSubmit = handleSubmit(() => {
-  onChangeModal(true);
+    resetForm()
+  }
 });
 
 
