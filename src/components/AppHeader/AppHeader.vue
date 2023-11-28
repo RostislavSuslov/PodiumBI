@@ -73,6 +73,10 @@ const nav = [
     text: 'blog',
     to: {name: 'blog'}
   },
+  {
+    text: 'courses',
+    to: {name: 'courses'}
+  },
 ]
 </script>
 

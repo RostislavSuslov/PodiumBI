@@ -5,12 +5,14 @@ import WalmartRetailDataView from '../views/WalmartRetailDataView.vue'
 import ContactView from '../views/ContactView.vue'
 import EpisodesView from '../views/EpisodesView.vue'
 import SingleEpisodes from '../views/SingleEpisodes.vue'
-import ToDoListView from '../views/ToDoListView.vue'
-
-
+import CoursesView from '../views/CoursesView.vue'
+import LoginView from '../views/LoginView.vue'
 import BlogView from '../views/BlogView.vue'
 import CustomLayout from '@/layouts/CustomLayout.vue'
+/*import useAuthStore from "@/stores/authStore"
 
+const authStore = useAuthStore()
+console.log(authStore.isAuth)*/
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -70,6 +72,19 @@ const router = createRouter({
         layout: CustomLayout,
       }
     },
+    {
+      path: '/courses',
+      name: 'courses',
+      component: CoursesView,
+      meta: {
+        private: true,
+      },
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: LoginView,
+    },
   /* {
       path: '/about',
       name: 'about',
@@ -83,10 +98,19 @@ const router = createRouter({
 
 window.isAuth = true;
 
-router.beforeEach((to, from) => {
-  // console.log(to, from);
-  if(to.meta.private){
-    return window.isAuth 
+router.beforeEach((to, from, next) => {
+
+/*  if(to.meta.private){
+    console.log(to.meta);
+    return window.isAuth
+  }*/
+
+  if (to.meta.private && !window.isAuth) {
+    console.log(to.meta);
+    next('/login');
+  } else {
+    next();
   }
+
 })
 export default router
