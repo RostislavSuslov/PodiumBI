@@ -6,7 +6,7 @@ import ContactView from '../views/ContactView.vue'
 import EpisodesView from '../views/EpisodesView.vue'
 import SingleEpisodes from '../views/SingleEpisodes.vue'
 import ToDoListView from '../views/ToDoListView.vue'
-ToDoListView
+
 
 import BlogView from '../views/BlogView.vue'
 import CustomLayout from '@/layouts/CustomLayout.vue'
@@ -43,11 +43,11 @@ const router = createRouter({
       name: 'contact',
       component: ContactView,
     },
-    {
-      path: '/to-do-list',
-      name: 'ToDoList',
-      component: ToDoListView,
-    },
+    // {
+    //   path: '/to-do-list',
+    //   name: 'ToDoList',
+    //   component: ToDoListView,
+    // },
     {
       path: '/posts',
       name: 'posts',

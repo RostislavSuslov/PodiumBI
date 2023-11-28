@@ -14,13 +14,19 @@ const createApiRouter = (api = apiClient) => {
     //   show: (id)=> api.get(`courses/${id}`),
     // },
     auth: {
-     login: async (data)=> {
+      login: async (data)=> {
         await getCSRF()
         /*після успішного виконання логіну, треба в локас-сторедж записати що юзер авторизований*/
         return await api.post("/login", data)
       },
-     me: ()=> api.get("/me"), //запит, якщо залогинений
-     // logout: ()=> api.get("/logout"),
+      me: ()=> api.get("/me"), //запит, якщо залогинений
+      logout: ()=> api.post("/logout"),
+    },
+    admin: {
+      courses: {
+        index: (params)=>api.get("/admin/courses/", {params}),
+        show: (courseId)=>api.get("/admin/courses/" + courseId),
+      },
     },
     posts: {
       index: (params) => api.get("posts", {params}),

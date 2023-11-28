@@ -1,7 +1,7 @@
 <template>
-    <TemplateFirstScreen/>
-    <BaseForm @showModal="showPopUp"/>
-    <BasePopup openPopup="openPopup"/>
+<!--    <TemplateFirstScreen/>-->
+    <BaseForm @showModal="setOpenPopup"/>
+    <BasePopup :openPopup="openPopup"/>
   <!--      <PopUpWrapper popupPosition="topRight">-->
   <!--        <template #body>-->
   <!--          <div> -->
@@ -16,7 +16,7 @@
   <!--          </div>-->
   <!--        </template>-->
   <!--      </PopUpWrapper>-->
-    <section class="mb-24">
+<!--    <section class="mb-24">
       <div class="container mx-auto px-4 max-w-[986px]">
         <AccordionWrapper :items="accordionList">
           <template #body="{bodyClass, item}">
@@ -34,7 +34,7 @@
           </template>
         </AccordionWrapper>
       </div>
-    </section>
+    </section>-->
 </template>
 
 <script setup>
@@ -43,16 +43,13 @@
     import PrepareButton from "@/components/PrepareButton.vue";
     import BaseForm from "@/components/ui/BaseForm.vue";
     import BasePopup from "@/components/ui/BasePopup.vue";
-    import {computed, ref} from "vue";
+    import {ref} from "vue";
 
     const openPopup = ref(false);
 
     const setOpenPopup = () => {
-      openPopup.value = true;
+       openPopup.value = true;
     }
-
-
-
 
     const accordionList = [
       {

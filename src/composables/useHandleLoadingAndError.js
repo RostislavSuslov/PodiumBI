@@ -17,8 +17,8 @@ const getMessageErrorByResponse = (error) => {
   return message || MessagesError.somethingWentWrong;
 };
 
-export const getData = (data) => {
-  return data?.data || data
+export const getData = (res) => {
+  return res?.data?.data || res?.data || res
 }
 
 const defaulOptions = {

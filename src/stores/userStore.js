@@ -5,7 +5,7 @@ import useAuthStore from "@/stores/authStore.js"
 const getFullUserName = (user) => user?.firstName + ' ' + user?.lastName;
 
 const useUserStore = defineStore('user',  ()=> {   //'user' unique id. Can't be the same
-    const user = ref({name: 'Test'});
+    const user = ref({name: ''});
     const getUserName = computed(()=> user.value.name);
     const authStore = useAuthStore()
 

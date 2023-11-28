@@ -3,28 +3,28 @@
       <div class="flex w-full max-w-[1464px] mx-auto px-3 py-6 pr-[60px]">
         <app-logo class="mr-[-57px]"></app-logo>
         <template-nav :items="nav" variant="header"></template-nav>
-        <div class="grid justify-center items-center">
-          <button @click="authStore.onLogout" v-if="authStore.isAuth" class="whitespace-nowrap  hover:text-primaryColor">LogOut</button>
-          <template v-else>
-            <login-modal/>
-            <registration-modal/>
-          </template>
-          {{authStore.usersName}}
+        <div v-if="isAuth" class="grid justify-center items-center">
+            <span>{{fullName}}</span>
+            <button @click="onLogout" class="whitespace-nowrap  hover:text-primaryColor" :disabled="loading">LogOut</button>
         </div>
       </div>
   </header>
 </template>
 
 <script setup>
+import {computed} from "vue";
 import AppLogo from "@/components/ui/AppLogo.vue";
 import TemplateNav from "@/components/ui/TemplateNav.vue";
-import LoginModal from "@/components/ui/LoginModal.vue";
-import RegistrationModal from "@/components/ui/RegistrationModal.vue";
 import useAuthStore from '@/stores/authStore.js'
-// import {userName} from '@/components/ui/BaseForm.vue'
+import useHandleLoadingAndError from "@/composables/useHandleLoadingAndError";
 
 const authStore = useAuthStore();
-
+const fullName = computed(()=> authStore.fullName)
+const isAuth = computed(()=> authStore.isAuth)
+const {handler, loading} = useHandleLoadingAndError()
+const onLogout = ()=> {
+  handler(authStore.logOut)
+}
 
 const nav = [
   {
@@ -61,10 +61,10 @@ const nav = [
     text: 'contact',
     to: {name: 'contact'}
   },
-  {
+  /*{
     text: 'ToDoList',
     to: {name: 'ToDoList'}
-  },
+  },*/
   {
     text: 'posts',
     to: {name: 'posts'}

@@ -1,85 +1,56 @@
 import {defineStore} from "pinia"
-import {ref} from "vue";
+import {ref, computed} from "vue";
+import apiRouter from "@/api/apiRouter.js";
+import {getData} from "@/composables/useHandleLoadingAndError";
 
 const useAuthStore = defineStore('appAuth', () => {   //'appAuth' unique id. Can't be the same
-  const users = ref([])
-  const isAuth = ref(false);
-  const usersName = ref("");
-  const logout = ref("")
+  const isAuth = ref(false)
+  const user = ref({});
 
-  const profile = ref({
-    id: 7,
+  const fullName = computed(()=>{
+     return user.value.first_name + " " + user.value.last_name
   })
-  const setAuth = (auth) => {
-    isAuth.value = auth
-  }
 
-  const getUser = (email) => {
-    return users.value.find(item => item.email === email)
-  }
- 
-  /* onLogin*/
-  const onLogin = async (form) => {
-    console.log(form);
-    await new Promise((resolve, reject) => {
-      setTimeout(() => {
-        const user = getUser(form.email)
-        console.log(typeof user);
-        if (!user || form.password !== user.password) {
-          return reject(new Error("invalid data"))
-        }
-        resolve(true);
+    const reset = ()=>{
+      isAuth.value = false;
+      user.value = {};
+    }
+    const logIn = async (data)=>{
+      const res = await apiRouter.auth.login(data)
+      isAuth.value = true
+      user.value = getData(res)
 
-      }, 1000);
-    })
+      return res
+    }
 
-    isAuth.value = true;
-    console.log(isAuth.value, form);
-    // console.log(mockAuth);
-  }
 
-  /*onLogout isAuth.value = false*/
-  const onLogout = async () => {
-    await new Promise((resolve) => {
-      setTimeout(() => {
-        isAuth.value = false
-        resolve(isAuth.value);
-      }, 1000);
-    })
-    console.log(isAuth.value);
-  }
+    const fetchUser = async () => {
+       if(isAuth.value) {
+         const res = await apiRouter.auth.me();
+         user.value = getData(res);
+       }
+    }
 
-  const onRegister = async (form) => {
-    await new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (getUser(form.email)) {
-          return reject(new Error('error юсер існє'))
-        }
-        // const users = getUsersStore();
-        users.value.push(form)
-        // setUsersStore(users);
-        resolve(true);
-      }, 1000);
-    })
-    isAuth.value = true;
-    console.log(isAuth);
-  }
+    const logOut = async () => {
+      if(isAuth.value) {
+        await apiRouter.auth.logout()
+        reset()
+      }
+    }
 
-  return {
-    profile,
-    users,
-    isAuth,
-    logout,
-    usersName,
-    setAuth,
-    onLogin,
-    onLogout,
-    onRegister,
-  }
+    return {
+      isAuth,
+      user,
+      fullName,
+      reset,
+      logIn,
+      fetchUser,
+      logOut
+    }
 
 }, {
   persist: {
-    paths: ['isAuth', 'users'],
+    paths: ['isAuth'],
   },
 })
 

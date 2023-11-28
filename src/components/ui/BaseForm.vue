@@ -29,7 +29,6 @@
       </div>
       <BaseButton :disabled="loading">Submit</BaseButton>
       <pre>{{ error }}</pre>
-      <pre>{{userName}}</pre>
     </form>
 
     <teleport to="body">
@@ -74,7 +73,7 @@ const initialValue = {
   password: "",
 };
 
-const { handleSubmit, values, errors, resetForm } = useForm({
+const { handleSubmit, values, resetForm } = useForm({
   initialValues: initialValue,
   validationSchema: yup.object({
     email: yup.string().required().email(),
@@ -102,11 +101,10 @@ const onChangeModal = (newVal) => {
 const {handler, loading, error} = useHandleLoadingAndError()
 
 const onSubmit =  handleSubmit(async (data, {resetForm}) => {
-  const res =  await handler(apiRouter.auth.login(data))
+  const res =  await handler(authStore.logIn(data))
 
 
   if (!res.error) {
-    authStore.usersName = res.data.data.first_name
     emit('showModal')
     resetForm()
   }
