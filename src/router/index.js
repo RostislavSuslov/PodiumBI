@@ -1,14 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import PodiumBiPortalView from '../views/PodiumBiPortalView.vue'
-import WalmartRetailDataView from '../views/WalmartRetailDataView.vue'
-import ContactView from '../views/ContactView.vue'
-import EpisodesView from '../views/EpisodesView.vue'
-import SingleEpisodes from '../views/SingleEpisodes.vue'
-import CoursesView from '../views/CoursesView.vue'
-import LoginView from '../views/LoginView.vue'
-import BlogView from '../views/BlogView.vue'
+import HomeView from '@/views/HomeView.vue'
+import PodiumBiPortalView from '@/views/PodiumBiPortalView.vue'
+import WalmartRetailDataView from '@/views/WalmartRetailDataView.vue'
+import ContactView from '@/views/ContactView.vue'
+import EpisodesView from '@/views/EpisodesView.vue'
+import SingleEpisodes from '@/views/SingleEpisodes.vue'
+import BlogView from '@/views/BlogView.vue'
 import CustomLayout from '@/layouts/CustomLayout.vue'
+import LoginView from '@/views/LoginView.vue'
+import CoursesView from '@/views/CoursesView.vue'
+import SingleCoursesView from "@/views/SingleCoursesView.vue";
 /*import useAuthStore from "@/stores/authStore"
 
 const authStore = useAuthStore()
@@ -81,6 +82,14 @@ const router = createRouter({
       },
     },
     {
+      path: '/courses/:id',
+      name: 'SingleCourses',
+      component: SingleCoursesView,
+      meta: {
+        private: true,
+      },
+    },
+    {
       path: '/login',
       name: 'login',
       component: LoginView,
@@ -97,20 +106,12 @@ const router = createRouter({
 })
 
 window.isAuth = true;
-
 router.beforeEach((to, from, next) => {
-
-/*  if(to.meta.private){
-    console.log(to.meta);
-    return window.isAuth
-  }*/
-
   if (to.meta.private && !window.isAuth) {
     console.log(to.meta);
     next('/login');
   } else {
     next();
   }
-
 })
 export default router

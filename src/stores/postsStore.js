@@ -15,5 +15,6 @@ export const usePostsStore = defineStore('postsStore', () => {
   }
 
 
+
   return { getPosts, postData }
 })

@@ -10,7 +10,6 @@ const useAuthStore = defineStore('appAuth', () => {   //'appAuth' unique id. Can
   const fullName = computed(()=>{
      return user.value.first_name + " " + user.value.last_name
   })
-
     const reset = ()=>{
       isAuth.value = false;
       user.value = {};
@@ -22,7 +21,6 @@ const useAuthStore = defineStore('appAuth', () => {   //'appAuth' unique id. Can
 
       return res
     }
-
 
     const fetchUser = async () => {
        if(isAuth.value) {

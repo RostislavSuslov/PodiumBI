@@ -1,6 +1,6 @@
 <template>
   <div>
-
+    danny@neweradrugtesting.com
     <form
         @submit="onSubmit"
         class="flex flex-col items-center border-2 px-6 py-10 max-w-xl mx-auto mb-6 rounded-[4px]"
@@ -56,17 +56,14 @@ import apiRouter from "@/api/apiRouter.js";
 import useHandleLoadingAndError from "@/composables/useHandleLoadingAndError";
 import useAuthStore from '@/stores/authStore.js'
 
-
 defineProps({
   modelValue: String,
 });
 
 const emit = defineEmits(['showModal'])
-
 const authStore = useAuthStore();
 const showPassword = ref(false);
 const openModal = ref(false);
-
 
 const initialValue = {
   email: "",
@@ -98,16 +95,15 @@ const submitForm = async () => {
 const onChangeModal = (newVal) => {
   openModal.value = newVal;
 };
+
 const {handler, loading, error} = useHandleLoadingAndError()
 
 const onSubmit =  handleSubmit(async (data, {resetForm}) => {
   const res =  await handler(authStore.logIn(data))
-
 
   if (!res.error) {
     emit('showModal')
     resetForm()
   }
 });
-
 </script>

@@ -35,8 +35,7 @@
 <script setup>
 import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
-// import apiClient from '../api/apiClient.js'
-import apiRouter from '../api/apiRouter'
+import apiRouter from '@/api/apiRouter'
 import useHandleLoadingAndError from '@/composables/useHandleLoadingAndError'
 import { useSinglePostStore } from '@/stores/singlePostStore';
 

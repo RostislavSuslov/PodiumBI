@@ -1,22 +1,20 @@
 <template>
-<!--    <TemplateFirstScreen/>-->
-    <BaseForm @showModal="setOpenPopup"/>
-    <BasePopup :openPopup="openPopup"/>
-  <!--      <PopUpWrapper popupPosition="topRight">-->
-  <!--        <template #body>-->
-  <!--          <div> -->
-  <!--            <div>-->
-  <!--              <h5 class="text-title_5 mb-[30px]">-->
-  <!--                  Good work!-->
-  <!--              </h5>-->
-  <!--            </div>-->
-  <!--            <div>-->
-  <!--              <img src="https://placehold.co/400" alt="img"/>-->
-  <!--            </div>-->
-  <!--          </div>-->
-  <!--        </template>-->
-  <!--      </PopUpWrapper>-->
-<!--    <section class="mb-24">
+    <TemplateFirstScreen/>
+    <PopUpWrapper popupPosition="topRight">
+      <template #body>
+        <div>
+          <div>
+            <h5 class="text-title_5 mb-[30px]">
+              Good work!
+            </h5>
+          </div>
+          <div>
+            <img src="https://placehold.co/400" alt="img"/>
+          </div>
+        </div>
+      </template>
+    </PopUpWrapper>
+    <section class="mb-24">
       <div class="container mx-auto px-4 max-w-[986px]">
         <AccordionWrapper :items="accordionList">
           <template #body="{bodyClass, item}">
@@ -34,7 +32,7 @@
           </template>
         </AccordionWrapper>
       </div>
-    </section>-->
+    </section>
 </template>
 
 <script setup>
