@@ -50,6 +50,7 @@ declare module 'vue' {
     UiBasePopup: typeof import('./src/components/ui/BasePopup.vue')['default']
     UiBaseWrapper: typeof import('./src/components/ui/BaseWrapper.vue')['default']
     UiControledField: typeof import('./src/components/ui/ControledField.vue')['default']
+    UiCreatCoursesForm: typeof import('./src/components/ui/CreatCoursesForm.vue')['default']
     UiEditTaskForm: typeof import('./src/components/ui/EditTaskForm.vue')['default']
     UiFieldWrapper: typeof import('./src/components/ui/FieldWrapper.vue')['default']
     UiIconsBaseIcon: typeof import('./src/components/ui/BaseIcon.vue')['default']

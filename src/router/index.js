@@ -10,10 +10,10 @@ import CustomLayout from '@/layouts/CustomLayout.vue'
 import LoginView from '@/views/LoginView.vue'
 import CoursesView from '@/views/CoursesView.vue'
 import SingleCoursesView from "@/views/SingleCoursesView.vue";
-/*import useAuthStore from "@/stores/authStore"
+import useAuthStore from "@/stores/authStore"
+import CreatNewCoursesView from "@/views/CreatNewCoursesView.vue";
 
-const authStore = useAuthStore()
-console.log(authStore.isAuth)*/
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -90,9 +90,18 @@ const router = createRouter({
       },
     },
     {
+      path: '/creat-courses',
+      name: 'creat-courses',
+      component: CreatNewCoursesView,
+      meta: {
+        private: true,
+      },
+    },
+    {
       path: '/login',
       name: 'login',
       component: LoginView,
+
     },
   /* {
       path: '/about',
@@ -105,9 +114,11 @@ const router = createRouter({
   ],
 })
 
-window.isAuth = true;
+
 router.beforeEach((to, from, next) => {
-  if (to.meta.private && !window.isAuth) {
+  const authStore = useAuthStore()
+
+  if (to.meta.private && !authStore.isAuth) {
     console.log(to.meta);
     next('/login');
   } else {
