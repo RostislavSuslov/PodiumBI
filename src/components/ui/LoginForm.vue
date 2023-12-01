@@ -43,7 +43,6 @@
     }),
   });
 
-
   const req = async (values) => {
     try{
       await auth.onLogin(values)
@@ -53,10 +52,7 @@
     }
     // alert(JSON.stringify(values, null, 2));
   }
- 
-  const onSubmit = handleSubmit(req);
-  
- 
+const onSubmit = handleSubmit(req);
 const email = defineInputBinds('email');
 const password = defineInputBinds('password');
 </script>

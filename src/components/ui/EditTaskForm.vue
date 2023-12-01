@@ -39,9 +39,6 @@
     import BaseLoading from "@/components/ui/BaseLoading.vue";
     import useTodoStore from "@/stores/todoStore.js"
     import useHandleLoadingAndError from "@/composables/useHandleLoadingAndError.js";
-    
-    
-   
 
     const props = defineProps({
         title: String,
@@ -59,9 +56,6 @@
         }
     })
 
-
-    
-    
     const validationSchema = {
         title: yup.string().required(),
     };

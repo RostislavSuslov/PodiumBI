@@ -11,5 +11,15 @@ export const useCoursesStore = defineStore('coursesStore', () => {
         coursesData.value = getData(res)
     }
 
-    return { getCourses, coursesData }
+/*    const getSearchCourses = async (params)=>  {
+        const res = await apiRouter.admin.courses.search(params)
+        coursesData.value = getData(res)
+    }*/
+
+    const getSearchCourses = async (searchQuery, params) => {
+        const res = await apiRouter.admin.courses.search({ ...params, search: searchQuery })
+        coursesData.value = getData(res)
+    }
+
+    return { getCourses, getSearchCourses, coursesData }
 })

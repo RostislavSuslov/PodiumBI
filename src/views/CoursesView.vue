@@ -2,6 +2,7 @@
   <div class="container mx-auto" v-show="!loading">
      <h1 class="text-title_1 mb-5">Courses list:</h1>
       <b v-if="loading">Loading...</b>
+    <input @change="onSetSearch($event.target.value)" type="search">
     <ul class=" grid grid-cols-3 gap-8">
       <li v-for="course in courses" :key="course.id" class="p-5 border">
         {{ course.title }}
@@ -25,8 +26,7 @@ import { useCoursesStore } from '@/stores/coursesStore.js';
 
 const coursesStore = useCoursesStore();
 const {loading, handler} = useHandleLoadingAndError();
-const filter = reactive({cursor: "",  per_page: 2});
-
+const filter = reactive({cursor: "",  per_page: 35});
 
 const courses = computed(()=> coursesStore.coursesData?.data)
 const prev = computed(()=> coursesStore.coursesData?.meta.prev_cursor);
@@ -45,6 +45,13 @@ const onSetFilter =( key, value )=>{
     fetchData()
 }
 
+const onSetSearch = async (query) => {
+   console.log(query) // запрос
+  filter.cursor = "";
+  filter.per_page = 35;  // или настройте значение по умолчанию по мере необходимости
+  filter.search = query; // Добавьте запрос поиска в объект фильтра
+  await fetchData();
+}
 /*const fetchData = async (params = {}) => {
   await handler(coursesStore.getCourses({
     ...params,

@@ -44,18 +44,17 @@
 
       <BaseButton :disabled="loading" >{{ loading ? "...Loading" : "Submit" }}</BaseButton>
       <pre>{{ error }}</pre>
-      <pre>{{ initialValue }}</pre>
+      <pre>{{ values }}</pre>
     </form>
   </div>
 </template>
 <script setup>
 import * as yup from "yup";
 import { useForm } from "vee-validate";
+import useHandleLoadingAndError from "@/composables/useHandleLoadingAndError";
 import TextField from "@/components/ui/TextField.vue";
 import PasswordField from "@/components/ui/PasswordField.vue";
 import BaseButton from "@/components/ui/BaseButton.vue";
-import apiRouter from "@/api/apiRouter.js";
-import useHandleLoadingAndError from "@/composables/useHandleLoadingAndError";
 import useCreatCoursesStore from '@/stores/creatCoursesStore';
 
 const creatCoursesStore = useCreatCoursesStore();
@@ -69,7 +68,7 @@ const initialValue = {
   description: "",
 };
 
-const { handleSubmit, values, resetForm } = useForm({
+const { handleSubmit, values } = useForm({
   initialValues: initialValue,
   validationSchema: yup.object({
     portal_id: yup.string().required(),
@@ -81,24 +80,6 @@ const { handleSubmit, values, resetForm } = useForm({
   }),
 });
 
-/*
-const submitForm = async () => {
-  loading.value = true;
-
-  try {
-    await apiRouter.admin.courses.create(values)
-    console.log(values)
-    resetForm();
-  } catch (error) {
-
-    console.log(error);
-  } finally {
-    loading.value = false;
-  }
-  alert(JSON.stringify(values, null, 2));
-};
-*/
-
 const {handler, loading, error} = useHandleLoadingAndError()
 
 const onSubmit =  handleSubmit(async (data, {resetForm}) => {
@@ -108,6 +89,5 @@ const onSubmit =  handleSubmit(async (data, {resetForm}) => {
   if (!res.error) {
     resetForm()
   }
-  console.log('Форма успешно отправлена');
 });
 </script>
