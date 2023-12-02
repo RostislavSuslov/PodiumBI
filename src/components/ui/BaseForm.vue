@@ -1,6 +1,6 @@
 <template>
   <div>
-    danny@neweradrugtesting.com
+
     <form
         @submit="onSubmit"
         class="flex flex-col items-center border-2 px-6 py-10 max-w-xl mx-auto mb-6 rounded-[4px]"

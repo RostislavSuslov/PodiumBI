@@ -69,10 +69,10 @@ const buttonClass = computed(()=> {
           contained: {
             primary:   "bg-primaryAccent    border-primaryColor     text-textColor      hover:text-white   hover:bg-primaryColor",
             secondary: "bg-secondaryColor   border-secondaryColor   text-textColor   hover:bg-secondaryAccent",
-            success:   "bg-green-500  border-green-500  text-white hover:bg-green-700",
-            warning:   "bg-orange-500 border-orange-500 text-white hover:bg-orange-700",
-            danger:    "bg-red-500    border-red-500    text-white hover:bg-red-700",
-            info:      "bg-sky-500    border-sky-500    text-white hover:bg-sky-700",
+            success:   "bg-green-500        hover:bg-green-400  border-green-500  text-white hover:bg-green-700",
+            warning:   "bg-orange-500       border-orange-500 text-white hover:bg-orange-700",
+            danger:    "bg-red-500          border-red-500    text-white hover:bg-red-700",
+            info:      "bg-sky-500          border-sky-500    text-white hover:bg-sky-700",
           },
           outlined: {
             primary:   "border-primaryAccent    text-textColor   hover:bg-primaryAccent         hover:text-white",

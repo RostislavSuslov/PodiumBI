@@ -11,15 +11,29 @@ export const useCoursesStore = defineStore('coursesStore', () => {
         coursesData.value = getData(res)
     }
 
-/*    const getSearchCourses = async (params)=>  {
-        const res = await apiRouter.admin.courses.search(params)
-        coursesData.value = getData(res)
-    }*/
-
     const getSearchCourses = async (searchQuery, params) => {
         const res = await apiRouter.admin.courses.search({ ...params, search: searchQuery })
         coursesData.value = getData(res)
     }
 
-    return { getCourses, getSearchCourses, coursesData }
+
+    const getSortCourses = async (sortQuery, params) => {
+        console.log(sortQuery, params)
+        const res = await apiRouter.admin.items.sort({
+            order_by: sortQuery,
+            sort_by: params,
+        });
+
+        coursesData.value = getData(res);
+    };
+
+
+    /*const getSortCourses = async (sortQuery, params) => {
+        const res = await apiRouter.admin.items.sort({ ...params, sort: sortQuery })
+        coursesData.value = getData(res)
+    }*/
+
+
+
+    return { getCourses, getSearchCourses, getSortCourses, coursesData }
 })

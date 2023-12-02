@@ -4,7 +4,7 @@
         <app-logo class="mr-[-57px]"></app-logo>
         <template-nav :items="nav" variant="header"></template-nav>
         <div v-if="isAuth" class="grid justify-center items-center">
-            <span>{{fullName}}</span>
+            <span class="text-center">{{fullName}}</span>
             <button @click="onLogout" class="whitespace-nowrap  hover:text-primaryColor" :disabled="loading">LogOut</button>
         </div>
       </div>

@@ -17,6 +17,7 @@
       <ul class="grid gap-4 grid-cols-5 grid-rows-1 my-8" >
         <li class="border text-center p-4" v-for="state in courses.states" :key="state.id">{{state.name}}</li>
       </ul>
+      <BaseButton @click="deletePost">Delete this course</BaseButton>
       <pre>route.params {{$route.params}}</pre>
     </div>
   </div>
@@ -28,6 +29,7 @@ import { useRoute } from 'vue-router';
 import apiRouter from '@/api/apiRouter'
 import useHandleLoadingAndError from '@/composables/useHandleLoadingAndError'
 import { useSingleCoursesStore } from '@/stores/singleCoursesStore';
+import BaseButton from "@/components/ui/BaseButton.vue";
 
 const singleCoursesStore = useSingleCoursesStore();
 const route = useRoute();
@@ -42,15 +44,17 @@ const fetchData = async () => {
   await handler(()=> Promise.all([fetchCourses()]))
 };
 
+const deletePost = async () => {
+  console.log(route.params.id)
+   await apiRouter.admin.courses.delete(route.params.id)
+}
+
+watch(()=> route.params.id, fetchData, { immediate: true })
+
 // const rating = ref(3);
 const ratingPercentage = computed(() => {
   return `${(courses.value.rating / 5) * 100}%`;
 });
-
-
-
-watch(()=> route.params.id, fetchData, { immediate: true })
-
 </script>
 
 <style>
