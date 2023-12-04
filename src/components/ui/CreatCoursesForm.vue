@@ -5,12 +5,7 @@
         class="flex flex-col items-center border-2 px-6 py-10 max-w-xl mx-auto mb-6 rounded-[4px]"
     >
 
-      <text-field
-          type="text"
-          name="portal_id"
-          label="portal_id"
-          placeholder="Write portal_id"
-      />
+
       <text-field
           type="text"
           name="title"
@@ -60,7 +55,7 @@ import useCreatCoursesStore from '@/stores/creatCoursesStore';
 const creatCoursesStore = useCreatCoursesStore();
 
 const initialValue = {
-  portal_id: "",
+  portal_id: "1",
   title: "",
   meta_title: "",
   meta_description: "",
@@ -71,7 +66,6 @@ const initialValue = {
 const { handleSubmit, values } = useForm({
   initialValues: initialValue,
   validationSchema: yup.object({
-    portal_id: yup.string().required(),
     title: yup.string().required(),
     meta_title: yup.string().required(),
     meta_description: yup.string().required(),
@@ -84,8 +78,6 @@ const {handler, loading, error} = useHandleLoadingAndError()
 
 const onSubmit =  handleSubmit(async (data, {resetForm}) => {
   const res =  await handler(creatCoursesStore.creatCourses(data))
-  console.log('11111res: ', res)
-  console.log('22222data: ', data)
   if (!res.error) {
     resetForm()
   }

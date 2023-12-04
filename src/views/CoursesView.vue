@@ -19,7 +19,7 @@
         <img src="public/assets/img/courses.webp" class="mb-6" alt="courses">
         <h3 class="text-title_4 font-bold mb-4">{{ course.title }}</h3>
         <h5>{{course.description}}</h5>
-        <h6>{{course.slug}}</h6>
+        <h6>{{course.price}}</h6>
         <div class="flex justify-between mt-auto">
           <router-link :to="'/courses/' + course.id" class="inline-flex items-center justify-center font-bold border shadow-xl rounded cursor-pointer min-h-[42px] bg-purple-500 text-white hover:bg-purple-700 rounded-none py-2 px-6">
             <b>See more</b>
@@ -44,11 +44,9 @@ import useHandleLoadingAndError from '@/composables/useHandleLoadingAndError'
 import { useCoursesStore } from '@/stores/coursesStore.js';
 import BaseButton from "@/components/ui/BaseButton.vue";
 
-const numberPerPage = 15;
-
 const coursesStore = useCoursesStore();
 const {loading, handler} = useHandleLoadingAndError();
-const filter = reactive({cursor: "",  per_page: numberPerPage});
+const filter = reactive({cursor: "",  per_page: 9});
 
 const courses = computed(()=> coursesStore.coursesData?.data)
 const prev = computed(()=> coursesStore.coursesData?.meta.prev_cursor);
