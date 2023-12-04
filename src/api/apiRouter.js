@@ -24,16 +24,17 @@ const createApiRouter = (api = apiClient) => {
     },
     admin: {
       courses: {
-        create: (data)     =>  api.post("/admin/courses", data),
-        update: (courseId) =>  api.put("/admin/courses/" + courseId),
+        create: (data)     =>  api.post("/admin/courses", data ),
         delete: (courseId) =>  api.delete("/admin/courses/" + courseId),
         index: (params)    =>  api.get("/admin/courses", {params}),
         show: (courseId)   =>  api.get("/admin/courses/" + courseId),
         search: (params)   =>  api.get("/admin/courses", {params}),
         sort: (params)     =>  api.post("/admin/items/sort?sort[1]=22&sort[2]=33", {params}), //order_by: id, order_by: price
       },
-
-    //{{localhost}}/api/v1/courses/1/thumbnail?_method=PUT
+      thumbnail: {
+        create: ( courseId, data) =>  api.post("/courses/" + courseId + "/thumbnail?_method=PUT", data),
+        delete: (courseId) =>  api.delete("/admin/courses/" + courseId + "/thumbnail"),
+      }
     },
     posts: {
       index: (params) => api.get("posts", {params}),

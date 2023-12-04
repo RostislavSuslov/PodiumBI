@@ -46,7 +46,7 @@ import BaseButton from "@/components/ui/BaseButton.vue";
 
 const coursesStore = useCoursesStore();
 const {loading, handler} = useHandleLoadingAndError();
-const filter = reactive({cursor: "",  per_page: 9});
+const filter = reactive({cursor: "",  per_page: 25});
 
 const courses = computed(()=> coursesStore.coursesData?.data)
 const prev = computed(()=> coursesStore.coursesData?.meta.prev_cursor);

@@ -20,7 +20,6 @@
               name="file"
               type="file"
           >
-<!--        <BaseButton @submit="onSubmit">Submit</BaseButton>-->
       </form>
 
       <ul class="grid gap-4 grid-cols-5 grid-rows-1 my-8" >
@@ -69,11 +68,6 @@ const ratingPercentage = computed(() => {
   return `${(courses.value.rating / 5) * 100}%`;
 });
 
-
-
-
-
-
 const initialValue = {
   email: "",
   password: "",
@@ -82,38 +76,25 @@ const initialValue = {
 const { handleSubmit, resetForm } = useForm({
   initialValues: initialValue,
 })
-/*const onSetFile = async (value) => {
-  console.log(value)
-  loading.value = true;
-
-  try {
-    await apiRouter.admin.courses.update(value)
-    resetForm();
-  } catch (error) {
-    console.log(error);
-  } finally {
-    resetForm();
-  }
-  // await fetchData();
-};*/
 
 const onSetFile = async (value) => {
-
+  console.log(value)
    loading.value = true;
   try {
     const formData = new FormData();
     formData.append('file', value);
 
     console.log(formData)
-    await apiRouter.admin.courses.update(route.params.id, formData);
-    alert("збс")
+    await apiRouter.admin.thumbnail.create( route.params.id, formData);
+    alert("done")
   } catch (error) {
-    console.error(error);
+   console.error(error);
   } finally {
     resetForm();
     loading.value = false;
   }
 };
+
 
 const onSubmit =  handleSubmit(async (data, {resetForm}) => {
   const res =  await handler(updateStore.update(data))

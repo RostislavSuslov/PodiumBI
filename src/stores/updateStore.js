@@ -6,8 +6,8 @@ import apiRouter from "@/api/apiRouter.js";
 const useUpdateStore = defineStore('appUpdate', () => {
     const course = ref({});
 
-    const update = async (data)=>{
-        const res = await apiRouter.admin.courses.update(data)
+    const update = async (key, value)=>{
+        const res = await apiRouter.admin.thumbnail.create(key, value)
         course.value = getData(res)
         return res
     }
