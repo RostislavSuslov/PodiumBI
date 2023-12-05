@@ -3,25 +3,28 @@
     <div v-if="loading">
       Loading...
     </div>
-    <div  v-else class=" p-5 border mb-5">
-      <h1 class="text-title_1 italic">Single course {{ courses.id }}</h1>
-      <h2 class="text-title_4 ">{{ courses.title }}</h2>
-      <div class="text-title_4">
-        rating:
-        <span class="star-rating">
-          <span :style="{ width: ratingPercentage }"></span>
-        </span>
-      </div>
+    <div v-else class=" p-5 border mb-5">
+          <h1 class="text-title_1 italic">Single course {{ courses.id }}</h1>
+          <form id="onUpdate">
+            <input class="text-title_4" :value="courses.title" />
+            <BaseButton @click.prevent="onUpdate">onUpdate title</BaseButton>
+          </form>
+          <div class="text-title_4">
+            rating:
+            <span class="star-rating">
+              <span :style="{ width: ratingPercentage }"></span>
+            </span>
+          </div>
 
-      <img :src="courses.thumbnail" :alt="courses.title">
       <form @submit="onSubmit">
+          <img :src="courses.thumbnail" :alt="courses.title">
           <input
               @change="onSetFile($event.target.files[0])"
               name="file"
               type="file"
           >
+        <BaseButton @click.prevent="onDeleteImage">Delete image</BaseButton>
       </form>
-
       <ul class="grid gap-4 grid-cols-5 grid-rows-1 my-8" >
         <li class="border text-center p-4" v-for="state in courses.states" :key="state.id">{{state.name}}</li>
       </ul>
@@ -94,6 +97,15 @@ const onSetFile = async (value) => {
     loading.value = false;
   }
 };
+
+const onDeleteImage = async () => {
+  await apiRouter.admin.thumbnail.delete(route.params.id);
+}
+
+const onUpdate = async (value) => {
+  console.log(value)
+  await apiRouter.admin.course.update(value);
+}
 
 
 const onSubmit =  handleSubmit(async (data, {resetForm}) => {

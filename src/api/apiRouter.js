@@ -26,6 +26,7 @@ const createApiRouter = (api = apiClient) => {
       courses: {
         create: (data)     =>  api.post("/admin/courses", data ),
         delete: (courseId) =>  api.delete("/admin/courses/" + courseId),
+        update: (courseId)   =>  api.put("/courses/" + courseId),
         index: (params)    =>  api.get("/admin/courses", {params}),
         show: (courseId)   =>  api.get("/admin/courses/" + courseId),
         search: (params)   =>  api.get("/admin/courses", {params}),
@@ -33,8 +34,9 @@ const createApiRouter = (api = apiClient) => {
       },
       thumbnail: {
         create: ( courseId, data) =>  api.post("/courses/" + courseId + "/thumbnail?_method=PUT", data),
-        delete: (courseId) =>  api.delete("/admin/courses/" + courseId + "/thumbnail"),
-      }
+        delete: (courseId) =>  api.delete("/courses/" + courseId + "/thumbnail"),
+      },
+
     },
     posts: {
       index: (params) => api.get("posts", {params}),
