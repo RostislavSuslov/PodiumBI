@@ -58,6 +58,7 @@ declare global {
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
   const useFilePath: typeof import('./src/composables/useFilePath.js')['default']
+  const useGetFieldError: typeof import('./src/composables/helpers.js')['useGetFieldError']
   const useHandleLoadingAndError: typeof import('./src/composables/useHandleLoadingAndError.js')['default']
   const useLink: typeof import('vue-router')['useLink']
   const useRoute: typeof import('vue-router')['useRoute']

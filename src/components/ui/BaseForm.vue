@@ -5,7 +5,7 @@
         @submit="onSubmit"
         class="flex flex-col items-center border-2 px-6 py-10 max-w-xl mx-auto mb-6 rounded-[4px]"
     >
-      <text-field
+<!--      <text-field
           type="email"
           name="email"
           label="Email"
@@ -17,8 +17,30 @@
           name="password"
           label="password"
           placeholder="Your password"
+      />-->
+      <text-field-validate
+          type="email"
+          name="email"
+          label="Email"
+          placeholder="Your email"
+          class="w-full"
       />
-      <div class="flex items-center my-2">
+
+      <text-field-validate
+          name="password"
+          label="password"
+          placeholder="Your password"
+          :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
+          :type="visible ? 'text' : 'password'"
+          @click:append-inner="visible = !visible"
+          class="w-full"
+      />
+      <combobox-validate
+          name="city"
+          label="City"
+          :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
+      ></combobox-validate>
+<!--      <div class="flex items-center my-2">
         <input
             type="checkbox"
             class="form-checkbox h-5 w-5 text-green-500"
@@ -26,7 +48,7 @@
             v-model="showPassword"
         />
         <label for="togglePassword" class="ml-2">Show Password</label>
-      </div>
+      </div>-->
       <BaseButton :disabled="loading">Submit</BaseButton>
       <pre>{{ error }}</pre>
     </form>
@@ -55,6 +77,8 @@ import BaseButton from "@/components/ui/BaseButton.vue";
 import apiRouter from "@/api/apiRouter.js";
 import useHandleLoadingAndError from "@/composables/useHandleLoadingAndError";
 import useAuthStore from '@/stores/authStore.js'
+import TextFieldValidate from "@/components/ui/TextFieldValidate.vue";
+import ComboboxValidate from "@/components/ui/ComboboxValidate.vue";
 
 defineProps({
   modelValue: String,
@@ -63,11 +87,13 @@ defineProps({
 const emit = defineEmits(['showModal'])
 const authStore = useAuthStore();
 const showPassword = ref(false);
+const visible = ref(false);
 const openModal = ref(false);
 
 const initialValue = {
   email: "",
   password: "",
+  city: "",
 };
 
 const { handleSubmit, values, resetForm } = useForm({
@@ -75,6 +101,7 @@ const { handleSubmit, values, resetForm } = useForm({
   validationSchema: yup.object({
     email: yup.string().required().email(),
     password: yup.string().required().min(6),
+    city: yup.string().required(),
   }),
 });
 

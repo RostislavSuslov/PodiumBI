@@ -23,6 +23,9 @@
               name="file"
               type="file"
           >
+        <div v-if="loadingSet">
+          loadingSet...
+        </div>
         <BaseButton @click.prevent="onDeleteImage">Delete image</BaseButton>
       </form>
       <ul class="grid gap-4 grid-cols-5 grid-rows-1 my-8" >
@@ -49,6 +52,7 @@ const updateStore = useUpdateStore();
 const singleCoursesStore = useSingleCoursesStore();
 const route = useRoute();
 const {handler, loading} = useHandleLoadingAndError();
+const {handler:handlerSet, loading:loadingSet} = useHandleLoadingAndError();
 const courses = ref({ courses: [] });
 const fetchCourses = async (url) => {
   const response = await apiRouter.admin.courses.show(route.params.id)
@@ -81,21 +85,9 @@ const { handleSubmit, resetForm } = useForm({
 })
 
 const onSetFile = async (value) => {
-  console.log(value)
-   loading.value = true;
-  try {
-    const formData = new FormData();
-    formData.append('file', value);
-
-    console.log(formData)
-    await apiRouter.admin.thumbnail.create( route.params.id, formData);
-    alert("done")
-  } catch (error) {
-   console.error(error);
-  } finally {
-    resetForm();
-    loading.value = false;
-  }
+  const formData = new FormData();
+  formData.append('file', value);
+  handlerSet(apiRouter.admin.thumbnail.create( route.params.id, formData));
 };
 
 const onDeleteImage = async () => {
@@ -142,5 +134,4 @@ const onSubmit =  handleSubmit(async (data, {resetForm}) => {
   top: 0;
   left: 0;
 }
-
 </style>
