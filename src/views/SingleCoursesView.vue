@@ -7,7 +7,8 @@
           <h1 class="text-title_1 italic">Single course {{ courses.id }}</h1>
           <form id="onUpdate">
             <input class="text-title_4" :value="courses.title" />
-            <BaseButton @click.prevent="onUpdate">onUpdate title</BaseButton>
+<!--            <BaseButton @click.prevent="onUpdate">onUpdate title</BaseButton>-->
+            <BaseButton @click.prevent="onUpdate(courses.title)">onUpdate title</BaseButton>
           </form>
           <div class="text-title_4">
             rating:
@@ -17,12 +18,13 @@
           </div>
 
       <form @submit="onSubmit">
-          <img :src="courses.thumbnail" :alt="courses.title">
+          <img :src="courses.thumbnail" :alt="courses.title" class="max-w-7xl max-h-96">
           <input
               @change="onSetFile($event.target.files[0])"
               name="file"
               type="file"
           >
+
         <div v-if="loadingSet">
           loadingSet...
         </div>
@@ -32,6 +34,7 @@
         <li class="border text-center p-4" v-for="state in courses.states" :key="state.id">{{state.name}}</li>
       </ul>
       <BaseButton @click="deletePost">Delete this course</BaseButton>
+
       <pre>route.params {{$route.params}}</pre>
     </div>
   </div>
@@ -87,16 +90,29 @@ const { handleSubmit, resetForm } = useForm({
 const onSetFile = async (value) => {
   const formData = new FormData();
   formData.append('file', value);
-  handlerSet(apiRouter.admin.thumbnail.create( route.params.id, formData));
+  try {
+    await apiRouter.admin.thumbnail.create(route.params.id, formData);
+    window.location.reload();
+  } catch (error) {
+    console.error('Error onSetFile image deletion:', error);
+  }
 };
 
+
+
 const onDeleteImage = async () => {
-  await apiRouter.admin.thumbnail.delete(route.params.id);
+  try {
+    await apiRouter.admin.thumbnail.delete(route.params.id);
+    // Если удаление прошло успешно, перезагрузите страницу
+    window.location.reload();
+  } catch (error) {
+    console.error('Error during image deletion:', error);
+    // Обработка ошибок, если нужно
+  }
 }
 
-const onUpdate = async (value) => {
-  console.log(value)
-  await apiRouter.admin.course.update(value);
+const onUpdate = async () => {
+  await apiRouter.admin.courses.update(route.params.id, courses.value.title);
 }
 
 
