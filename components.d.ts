@@ -84,9 +84,11 @@ declare module 'vue' {
     UiTemplateLink: typeof import('./src/components/ui/TemplateLink.vue')['default']
     UiTemplateNav: typeof import('./src/components/ui/TemplateNav.vue')['default']
     UiTemplateNavItem: typeof import('./src/components/ui/TemplateNavItem.vue')['default']
+    UiTextareaFieldValidate: typeof import('./src/components/ui/TextareaFieldValidate.vue')['default']
     UiTextField: typeof import('./src/components/ui/TextField.vue')['default']
     UiTextFieldValidate: typeof import('./src/components/ui/TextFieldValidate.vue')['default']
     UiVeeValidField: typeof import('./src/components/ui/VeeValidField.vue')['default']
     WelcomeItem: typeof import('./src/components/WelcomeItem.vue')['default']
+    WigetsFormsFormCourseUpdate: typeof import('./src/components/wigets/forms/FormCourseUpdate.vue')['default']
   }
 }

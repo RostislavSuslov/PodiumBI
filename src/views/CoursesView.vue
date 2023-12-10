@@ -21,7 +21,7 @@
         <h5>{{course.description}}</h5>
         <h6>{{course.price}}</h6>
         <div class="flex justify-between mt-auto">
-          <router-link :to="'/courses/' + course.id" class="inline-flex items-center justify-center font-bold border shadow-xl rounded cursor-pointer min-h-[42px] bg-purple-500 text-white hover:bg-purple-700 rounded-none py-2 px-6">
+          <router-link :to="'/courses/' + course.slug" class="inline-flex items-center justify-center font-bold border shadow-xl rounded cursor-pointer min-h-[42px] bg-purple-500 text-white hover:bg-purple-700 rounded-none py-2 px-6">
             <b>See more</b>
           </router-link>
 

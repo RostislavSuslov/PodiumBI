@@ -26,7 +26,7 @@ const createApiRouter = (api = apiClient) => {
       courses: {
         create: (data) => api.post('/admin/courses', data),
         delete: (courseId) => api.delete('/admin/courses/' + courseId),
-        update: (courseId, data) => api.put('/courses/' + courseId, data),
+        update: (courseId, data) => api.put('/admin/courses/' + courseId, data),
         index: (params) => api.get('/admin/courses', { params }),
         show: (courseId) => api.get('/admin/courses/' + courseId),
         search: (params) => api.get('/admin/courses', { params }),
