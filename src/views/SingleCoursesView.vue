@@ -24,17 +24,21 @@ import { useRoute } from 'vue-router';
 import useHandleLoadingAndError from '@/composables/useHandleLoadingAndError';
 import { useSingleCoursesStore } from '@/stores/singleCoursesStore';
 import FormCourseUpdate from "@/components/wigets/forms/FormCourseUpdate.vue";
+import useCashStore from "@/stores/cashStore";
 
 
 const singleCoursesStore = useSingleCoursesStore();
 const route = useRoute();
 const {handler, loading, error} = useHandleLoadingAndError({loading: true});
 
+const cashStore = useCashStore()
+
 const course = computed(()=>{
   return singleCoursesStore.course
 })
+
 console.log(course)
-onMounted (()=> handler(singleCoursesStore.fetchCourse(route.params.id)))
+onMounted (()=> handler(Promise.all([cashStore.getSelects(), singleCoursesStore.fetchCourse(route.params.id)])))
 </script>
 
 <style>

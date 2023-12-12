@@ -59,39 +59,102 @@
         placeholder="Enter video url"
         class="w-full"
     />
+  <pre>{{errors}}</pre>
+    <combobox-field-validate
+          name="language"
+          label="Select Languages"
+          :items="selects.languages"
+          item-title="name"
+          item-value="id"
+          :return-object="false"
+      />
 
-<!--  <v-select
-        v-model="selectedLanguage"
-        name="language"
-        label="Select Language"
-        :items='[props.source.language.name ? null : "English"]'
-        class="w-full"
-    ></v-select>-->
-<!--
-    <v-select
-         name="author_id"
-         label="Select Author"
-         :items="[props.source.author_id ? null : 1]"
-         class="w-full"
-     ></v-select>-->
 
-    <v-combobox
-         name="state_ids"
-         label="Other Training Options"
-         :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
-         chips
-         multiple
-         hide-selected
-         filter-keys
-         closable-chips
-         class="w-full"
- ></v-combobox>
-    <!-- Other Training Options *  component: v-select -->
-    <!-- Select Feature *  component: v-combobox -->
-    <!-- Course Topics *  component: v-combobox -->
+
+    <combobox-field-validate
+        name="author_id"
+        label="Select author"
+        :items="selects.authors"
+        item-title="name"
+        item-value="id"
+        :return-object="false"
+
+    ></combobox-field-validate>
+    <!--    item-title="author_id"
+        item-value="id"
+    :return-object="false"-->
+
+    <combobox-field-validate
+        name="state_ids"
+        label="states"
+        :items="selects.states"
+        item-title="name"
+        item-value="id"
+        chips
+        multiple
+        hide-selected
+        custom-key-filter
+        closable-chips
+        :return-object="false"
+    />
+
+    <combobox-field-validate
+        name="feature_ids"
+        label="Other Training Options"
+        :items="selects.features"
+        item-title="name"
+        item-value="id"
+        chips
+        multiple
+        hide-selected
+        custom-key-filter
+        closable-chips
+        :return-object="false"
+    />
+    <combobox-field-validate
+        name="Option"
+        label="Options"
+        :items="selects.options"
+        item-title="name"
+        item-value="id"
+        chips
+        multiple
+        hide-selected
+        custom-key-filter
+        closable-chips
+        :return-object="false"
+    />
+    <combobox-field-validate
+        name="agency_ids"
+        label="Course Topics(agencies)"
+        :items="selects.agencies"
+        item-title="name"
+        item-value="id"
+        chips
+        multiple
+        hide-selected
+        custom-key-filter
+        closable-chips
+        :return-object="false"
+    />
+
+    <combobox-field-validate
+        name="tag_id"
+        label="Tags"
+        :items="selects.tags"
+        item-title="name"
+        item-value="id"
+        chips
+        multiple
+        hide-selected
+        custom-key-filter
+        closable-chips
+        :return-object="false"
+    />
+
+
     <!-- Select Subtitles *  component: v-select  -->
-    <!-- Select State  *  component: v-combobox  -->
-    <!-- Select Tags   *  component: v-select  -->
+
 
     <text-field-validate
         name="meta_title"
@@ -114,13 +177,15 @@
 </template>
 
 <script setup>
-import {computed, ref} from "vue";
+import {computed} from "vue";
 import TextFieldValidate from "@/components/ui/TextFieldValidate.vue";
 import {useForm} from "vee-validate";
 import * as yup from "yup";
 import useHandleLoadingAndError from "@/composables/useHandleLoadingAndError";
 import apiRouter from "@/api/apiRouter.js";
 import TextareaFieldValidate from "@/components/ui/TextareaFieldValidate.vue";
+import useCashStore from "@/stores/cashStore";
+import ComboboxFieldValidate from "@/components/ui/ComboboxFieldValidate.vue";
 
 const props = defineProps({
   courseId: {
@@ -138,13 +203,16 @@ const props = defineProps({
       description: "",
       objective: "",
       video: "",
-      // language: {
-      //   name: "",
-      //   code: "" },
-      // author_id: "",
-      state_ids: "",
+      language: {},
+      author_id: {},
+      states: [],
+      features: [],
+      options: [],
+      agencies: [],
+      tags: [],
       meta_title: "",
       meta_description: "",
+      // subtitles:	null, ????
     }),
   },
 
@@ -152,9 +220,10 @@ const props = defineProps({
 
 const emit = defineEmits(['success'])
 
-//const selectedLanguage = ref(props.source.language.name);
-const selectedState_ids = ref(props.source.state_ids);
-console.log(selectedState_ids.value)
+const cashStore = useCashStore()
+
+const selects = computed(()=> cashStore.cashData.selects)
+console.log(selects)
 const initialValue = computed( ()=> ({
   title: props.source.title,
   slug: props.source.slug,
@@ -164,15 +233,20 @@ const initialValue = computed( ()=> ({
   description: props.source.description,
   objective: props.source.objective,
   video: props.source.video,
-  // language: props.source.language.name,
-  // author_id: props.source.author_id,
-  state_ids: props.source.state_ids,
+  language: props.source.language.id,
+  author_id: props.source.author.id,
+  state_ids: props.source.states.map(item=>item.id),
+  feature_ids: props.source.features.map(item=>item.id),
+  option: props.source.options.map(item=>item.id),
+  agency_ids: props.source.agencies.map(item=>item.id),
+  tag_id: props.source.tags.map(item=>item.id),
   meta_title: props.source.meta_title,
   meta_description: props.source.meta_description,
 }) )
+
 const {handler, loading, error} = useHandleLoadingAndError()
 
-const { handleSubmit } = useForm({
+const { handleSubmit, errors } = useForm({
   initialValues: initialValue,
   validationSchema: yup.object({
     title: yup.string().max(255).required(),
@@ -185,16 +259,17 @@ const { handleSubmit } = useForm({
     video: yup.string().max(255),
     meta_title: yup.string().max(255).required(),
     meta_description: yup.string().max(255).required(),
-    // language: yup.string().required(),
-    // author_id: yup.string().required(),
-    state_ids: yup.string().required(),
+    language: yup.string().required(),
+    author_id: yup.string().required(),
+    state_ids: yup.array().of(yup.string()).required(),
+    feature_ids: yup.array().of(yup.string()).required(),
+    option: yup.array().of(yup.string()).required(),
+    agency_ids: yup.array().of(yup.string()).required(),
+    tag_id: yup.array().of(yup.string()).required(),
   }),
 });
 
 const onSubmit =  handleSubmit(async (data) => {
-  // data.language =  { id: 11, portal_id: 1, name: selectedLanguage.value, code: 'en' };
- //data.language = 1; // ????
-
 
   const res =  await handler(apiRouter.admin.courses.update(props.courseId, data))
 
@@ -204,6 +279,8 @@ const onSubmit =  handleSubmit(async (data) => {
     emit('success', res.data)
   }
 });
+
+
 </script>
 
 <style scoped>
