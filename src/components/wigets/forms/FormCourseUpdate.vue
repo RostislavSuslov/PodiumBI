@@ -1,17 +1,20 @@
 <template>
+
   <form
       @submit="onSubmit"
       class="flex flex-col items-center border-2 px-6 py-10 max-w-xl mx-auto mb-6 rounded-[4px]"
   >
-    <div v-if="error" class="border border-red-500 text-red-500 rounded-lg mb-5 p-4">
+    <div class="border border-red-500 text-red-500 rounded-lg mb-5 p-4">
       {{error}}
     </div>
+
     <text-field-validate
         name="title"
         label="Title"
         placeholder="title"
         class="w-full"
     />
+
     <text-field-validate
         name="slug"
         label="Slug"
@@ -35,6 +38,14 @@
         placeholder="Enter action"
         class="w-full"
     />
+    <base-editor
+        name="info"
+        label="Call to action box "
+        placeholder="Enter action"
+        class="w-full"
+    />
+
+
     <textarea-field-validate
         name="summary"
         label="Summary"
@@ -67,6 +78,7 @@
           item-title="name"
           item-value="id"
           :return-object="false"
+          auto-select-first="exact"
       />
 
 
@@ -77,9 +89,7 @@
         :items="selects.authors"
         item-title="name"
         item-value="id"
-        :return-object="false"
-
-    ></combobox-field-validate>
+    />
     <!--    item-title="author_id"
         item-value="id"
     :return-object="false"-->
@@ -90,39 +100,24 @@
         :items="selects.states"
         item-title="name"
         item-value="id"
-        chips
         multiple
-        hide-selected
-        custom-key-filter
-        closable-chips
-        :return-object="false"
     />
-
+    <pre>{{values.feature_ids}}</pre>
     <combobox-field-validate
         name="feature_ids"
         label="Other Training Options"
         :items="selects.features"
         item-title="name"
         item-value="id"
-        chips
         multiple
-        hide-selected
-        custom-key-filter
-        closable-chips
-        :return-object="false"
     />
     <combobox-field-validate
-        name="Option"
+        name="option_ids"
         label="Options"
         :items="selects.options"
         item-title="name"
         item-value="id"
-        chips
         multiple
-        hide-selected
-        custom-key-filter
-        closable-chips
-        :return-object="false"
     />
     <combobox-field-validate
         name="agency_ids"
@@ -130,12 +125,7 @@
         :items="selects.agencies"
         item-title="name"
         item-value="id"
-        chips
         multiple
-        hide-selected
-        custom-key-filter
-        closable-chips
-        :return-object="false"
     />
 
     <combobox-field-validate
@@ -144,15 +134,17 @@
         :items="selects.tags"
         item-title="name"
         item-value="id"
-        chips
         multiple
-        hide-selected
-        custom-key-filter
-        closable-chips
-        :return-object="false"
     />
 
-
+    <combobox-field-validate
+        name="subtitle_ids"
+        label="Subtitles"
+        :items="selects.subtitles"
+        item-title="name"
+        item-value="id"
+        multiple
+    />
     <!-- Select Subtitles *  component: v-select  -->
 
 
@@ -186,6 +178,7 @@ import apiRouter from "@/api/apiRouter.js";
 import TextareaFieldValidate from "@/components/ui/TextareaFieldValidate.vue";
 import useCashStore from "@/stores/cashStore";
 import ComboboxFieldValidate from "@/components/ui/ComboboxFieldValidate.vue";
+import BaseEditor from "@/components/ui/BaseEditor.vue";
 
 const props = defineProps({
   courseId: {
@@ -212,7 +205,7 @@ const props = defineProps({
       tags: [],
       meta_title: "",
       meta_description: "",
-      // subtitles:	null, ????
+      subtitles: [],
     }),
   },
 
@@ -224,6 +217,7 @@ const cashStore = useCashStore()
 
 const selects = computed(()=> cashStore.cashData.selects)
 console.log(selects)
+
 const initialValue = computed( ()=> ({
   title: props.source.title,
   slug: props.source.slug,
@@ -237,16 +231,17 @@ const initialValue = computed( ()=> ({
   author_id: props.source.author.id,
   state_ids: props.source.states.map(item=>item.id),
   feature_ids: props.source.features.map(item=>item.id),
-  option: props.source.options.map(item=>item.id),
+  option_ids: props.source.options.map(item=>item.id),
   agency_ids: props.source.agencies.map(item=>item.id),
   tag_id: props.source.tags.map(item=>item.id),
   meta_title: props.source.meta_title,
   meta_description: props.source.meta_description,
+  subtitle_ids: (props.source.subtitles || []).map(item=>item.id),
 }) )
 
 const {handler, loading, error} = useHandleLoadingAndError()
 
-const { handleSubmit, errors } = useForm({
+const { handleSubmit, errors, values } = useForm({
   initialValues: initialValue,
   validationSchema: yup.object({
     title: yup.string().max(255).required(),
@@ -263,14 +258,14 @@ const { handleSubmit, errors } = useForm({
     author_id: yup.string().required(),
     state_ids: yup.array().of(yup.string()).required(),
     feature_ids: yup.array().of(yup.string()).required(),
-    option: yup.array().of(yup.string()).required(),
+
     agency_ids: yup.array().of(yup.string()).required(),
     tag_id: yup.array().of(yup.string()).required(),
   }),
 });
 
 const onSubmit =  handleSubmit(async (data) => {
-
+  console.log(data)
   const res =  await handler(apiRouter.admin.courses.update(props.courseId, data))
 
   if (!res.error) {

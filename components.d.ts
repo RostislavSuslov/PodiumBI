@@ -39,6 +39,7 @@ declare module 'vue' {
     UiBaseAccordion: (typeof import('./src/components/ui/BaseAccordion2.vue'))['default']
     UiBaseAccordion2: typeof import('./src/components/ui/BaseAccordion2.vue')['default']
     UiBaseButton: typeof import('./src/components/ui/BaseButton.vue')['default']
+    UiBaseEditor: typeof import('./src/components/ui/BaseEditor.vue')['default']
     UiBaseField: (typeof import('./src/components/ui/BaseField.vue'))['default']
     UiBaseFieldWrapper: (typeof import('./src/components/ui/BaseFieldWrapper.vue'))['default']
     UiBaseForm: typeof import('./src/components/ui/BaseForm.vue')['default']

@@ -1,12 +1,16 @@
 <template>
-  <v-combobox :label="label"
-              :placeholder="placeholder"
-              v-model="innerValue"
-              :error="!!hasError"
-              :error-messages="errorText"
-              class="w-full"
-              v-bind="$attrs"
-              :variant="variant"
+  <v-autocomplete
+      :label="label"
+      :placeholder="placeholder"
+      v-model="innerValue"
+      :error="!!hasError"
+      :error-messages="errorText"
+      class="w-full"
+      v-bind="$attrs"
+      :variant="variant"
+      :closableChips="closableChips"
+      :hideSelected="hideSelected"
+      :chips="chips"
   />
 </template>
 
@@ -19,7 +23,6 @@ const props = defineProps({
     type: String,
     default: "",
   },
-
   label: String,
   placeholder: String,
   modelValue: String,
@@ -28,7 +31,19 @@ const props = defineProps({
   variant: {
     type: String,
     default: "outlined"
-  }
+  },
+  chips: {
+    type: Boolean,
+    default: true,
+  },
+  hideSelected: {
+    type: Boolean,
+    default: true,
+  },
+    closableChips: {
+      type: Boolean,
+       default: true,
+  },
 });
 defineEmits(["update:modelValue"]);
 
