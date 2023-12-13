@@ -94,5 +94,6 @@ declare module 'vue' {
     UiVeeValidField: typeof import('./src/components/ui/VeeValidField.vue')['default']
     WelcomeItem: typeof import('./src/components/WelcomeItem.vue')['default']
     WigetsFormsFormCourseUpdate: typeof import('./src/components/wigets/forms/FormCourseUpdate.vue')['default']
+    WigetsFormsFormCourseUpdateBACK: typeof import('./src/components/wigets/forms/FormCourseUpdateBACK.vue')['default']
   }
 }
