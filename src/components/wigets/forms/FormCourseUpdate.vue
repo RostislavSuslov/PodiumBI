@@ -8,49 +8,32 @@
     </div>
 
     <text-field-validate name="title" label="Title" placeholder="title" class="w-full" />
-
     <text-field-validate name="slug" label="Slug" placeholder="slug" class="w-full" />
     <text-field-validate name="id" label="Course ID: " placeholder="slug" class="w-full" disabled />
 
     <!-- type="file" component -->
     <input name="file" type="file" class="my-6" />
-    <textarea-field-validate
-      name="info"
-      label="Call to action box "
-      placeholder="Enter action"
-      class="w-full"
-    />
+
     <base-editor
       name="info"
       label="Call to action box "
       placeholder="Enter action"
       class="w-full"
     />
-
-    <textarea-field-validate
-      name="summary"
-      label="Summary"
-      placeholder="Enter action"
-      class="w-full"
-    />
-    <textarea-field-validate
+    <base-editor name="summary" label="Summary" placeholder="Enter summary" class="w-full" />
+    <base-editor
       name="description"
       label="Course Description"
       placeholder="Enter description"
       class="w-full"
     />
-    <textarea-field-validate
+    <base-editor
       name="objective"
       label="Objectives"
       placeholder="Enter objectives"
       class="w-full"
     />
-    <text-field-validate
-      name="video"
-      label="Video url"
-      placeholder="Enter video url"
-      class="w-full"
-    />
+    <text-field-validate name="video" label="Video url" placeholder="https:/" class="w-full" />
     <pre>{{ errors }}</pre>
     <combobox-field-validate
       name="language"
@@ -61,7 +44,6 @@
       :return-object="false"
       auto-select-first="exact"
     />
-
     <combobox-field-validate
       name="author_id"
       label="Select author"
@@ -72,7 +54,6 @@
     <!--    item-title="author_id"
         item-value="id"
     :return-object="false"-->
-
     <combobox-field-validate
       name="state_ids"
       label="states"
@@ -106,7 +87,6 @@
       item-value="id"
       multiple
     />
-
     <combobox-field-validate
       name="tag_id"
       label="Tags"
@@ -115,7 +95,6 @@
       item-value="id"
       multiple
     />
-
     <combobox-field-validate
       name="subtitle_ids"
       label="Subtitles"
@@ -125,7 +104,6 @@
       multiple
     />
     <!-- Select Subtitles *  component: v-select  -->
-
     <text-field-validate
       name="meta_title"
       label="Meta Title"
