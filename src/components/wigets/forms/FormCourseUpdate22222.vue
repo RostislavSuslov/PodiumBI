@@ -147,7 +147,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import TextFieldValidate from '@/components/ui/TextFieldValidate.vue'
 import { useForm } from 'vee-validate'
 import * as yup from 'yup'
@@ -204,8 +204,8 @@ const initialValue = computed(() => ({
   description: props.source.description,
   objective: props.source.objective,
   video: props.source.video,
-  language: props.source.language ? props.source.language.id : '',
-  author_id: props.source.author ? props.source.author.id : '',
+  language: props.source.language.id,
+  author_id: props.source.author.id,
   state_ids: props.source.states.map((item) => item.id),
   feature_ids: props.source.features.map((item) => item.id),
   option_ids: props.source.options.map((item) => item.id),
@@ -245,9 +245,44 @@ const { handleSubmit, errors, values } = useForm({
   })
 })
 
-const onSubmit = handleSubmit(async (data) => {
+/*const onSubmit = handleSubmit(async (data) => {
   console.log(data)
   const res = await handler(apiRouter.admin.courses.update(props.courseId, data))
+
+  if (!res.error) {
+    console.log(res)
+    console.log(res.data)
+    emit('success', res.data)
+  }
+})*/
+const originalValues = ref({ ...props.source })
+
+const changedFields = ref({}) // Об'єкт для зберігання змінених полів
+
+// Відстежування змін у формі
+watch(
+  values,
+  (newValues) => {
+    for (const key in originalValues.value) {
+      if (JSON.stringify(newValues[key]) !== JSON.stringify(originalValues.value[key])) {
+        changedFields.value[key] = newValues[key] // Зберігаємо змінені поля
+      } else {
+        delete changedFields.value[key] // Видаляємо поле, якщо воно повернулося до початкового стану
+      }
+    }
+  },
+  { deep: true }
+)
+
+const getChangedFields = () => {
+  return changedFields.value // Повертаємо змінені поля
+}
+
+const onSubmit = handleSubmit(async () => {
+  const changedData = getChangedFields()
+  console.log('Змінені дані для відправки:', changedData)
+
+  const res = await handler(apiRouter.admin.courses.update(props.courseId, changedData))
 
   if (!res.error) {
     console.log(res)
